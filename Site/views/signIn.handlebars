@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Player Log-In</title>
+</head>
+<body>
+<?php
+
+ include 'db.php'; 
+ 
+ 
+   
+  $Name = $_POST['Name'];
+  $Password = $_POST['Password'];
+ 
+  
+  if (empty($_POST['Name'])) {
+         echo "No Name Given <br>";
+  }	
+  else if (empty($_POST['Password'])){
+		 echo "No Password Given <br>";
+  
+  }
+ else{
+ $query = "SELECT ID FROM users WHERE Name ='". $Name. "' AND Password ='". $Password. "'";
+ 
+ 
+
+  $id = mysqli_query($dbc, $query)
+  or die(mysqli_error());
+	
+	
+  //mysqli_close($dbc);
+
+  $info = mysqli_fetch_array( $id ); 
+  $ID = $info['ID'];
+
+ if($info != NULL){
+	
+	//THE GAME
+	$query = "Select * from resources Where UserID ='". $ID . "'";	
+	
+	$fetch = mysqli_query($dbc, $query) or die(mysqli_error());;
+		
+	
+		while($array = mysqli_fetch_array($fetch)){
+			 $Energy = "<b>Energy:</b> ".$array['Energy'] . "<br>"; 
+			 $Water = "<b>Water:</b> ".$array['Water'] . " <br>"; 
+			 $Food = "<b>Food:</b> ".$array['Food'] . " <br>"; 
+			 $Minerals = "<b>Minerals:</b> ".$array['Minerals'] . " <br>"; 
+			 $Oxygen = "<b>Oxygen:</b> ".$array['Oxygen'] . " <br>"; 
+			 $Science = "<b>Science:</b> ".$array['Science'] . " <br>"; 
+			 $Matter = "<b>Dark Matter:</b> ".$array['DarkMatter'] . " <br>"; 
+			 $Population = "<b>Population:</b> ".$array['Population'] . " <br>"; 
+			 $GC = "<b>Galactic Currency:</b> ".$array['GC'] . " <br>"; 
+		}	
+	?>
+
+
+ <link rel="stylesheet" type="text/css" href="SpaceGame.css">
+<p>
+<?php echo "Welcome ".$Name .""; ?>
+<ul>
+  <li><?php print $Energy ?></li>
+  <li><?php print $Water  ?></li>
+  <li><?php print $Food  ?></li>
+  <li><?php print $Minerals  ?></li>
+  <li><?php print $Oxygen  ?></li>
+  <li><?php print $Science  ?></li>
+  <li><?php print $Matter  ?></li>
+  <li><?php print $Population  ?></li>
+  <li><?php print $GC  ?></li>
+</ul>
+</p>	
+	
+	<?php
+	
+	
+	
+	
+	
+	
+  //END OF THE GAME
+ }
+ 
+ else{
+	 echo "redirect to register page";
+ }
+ }
+  
+ ?>
+ 
+</body>
+</html>
