@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="SpaceGame.css">
+    <div id="1" class="center">
+        <title>Unlimited Space</title>
+        <h1>Register</h1>
+    </div>
+</head>
+    {{#if error}}
+<div class="center">{{error}}</div>
+    {{/if}}
+<p1>
+    <form method="post" action="/stationcreate">
+
+        {{!<label for="Station">Station Name:</label>}}
+        {{!<input type="text" id="Station" name="Station" /><br />}}
+
+        {{!<label for="playerName">Player Name:</label>}}
+        {{!<input type="text" id="playerName" name="playerName" /><br />}}
+
+        <button type="submit">Create Station</button>
+    </form>
+</p1>
+
+
+<div id="1" class="center">
+    <p2>
+        <form action="/">
+            <input type=submit value="Home"><a href="/"></a>
+        </form>
+    </p2>
+
+</div>
+
+
+<body>
+
+</body>
+</html>

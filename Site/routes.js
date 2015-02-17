@@ -28,6 +28,22 @@ module.exports = function (app, passport) {
     }));
 
     // =====================================
+    // Station Create ==============================
+    // =====================================
+    // show the stationcreate form
+    app.get('/stationcreate', function (req, res) {
+        res.render('stationcreate', { error: req.flash('error') });
+    });
+
+    // process the stationcreate form
+
+    app.post('/stationcreate', passport.authenticate('local-signup', {
+        successRedirect: '/profile', // redirect to the secure profile section
+        failureRedirect: '/stationcreate', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }));
+
+    // =====================================
     // PROFILE SECTION =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
