@@ -8,8 +8,13 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         res.render('home', { error: req.flash('error') });
     });
+
     // process the login form
-    // app.post('/', do all our passport stuff here);
+    app.post('/', passport.authenticate('local-login', {
+        successRedirect: '/stationcreate', // redirect to the secure profile section
+        failureRedirect: '/', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }));
 
     // =====================================
     // register ==============================
@@ -22,7 +27,7 @@ module.exports = function (app, passport) {
     // process the register form
 
     app.post('/register', passport.authenticate('local-signup', {
-        successRedirect: '/profile', // redirect to the secure profile section
+        successRedirect: '/stationcreate', // redirect to the secure profile section
         failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -48,8 +53,8 @@ module.exports = function (app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('profile.ejs', {
+    app.get('/stationcreate', isLoggedIn, function (req, res) {
+        res.render('stationcreate', {
             user: req.user // get the user out of session and pass to template
         });
     });
