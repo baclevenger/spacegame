@@ -31,7 +31,7 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
 
  // set up our express application
  app.use(morgan('dev')); // log every request to the console
- app.use(cookieParser()); // read cookies (needed for auth)
+ app.use(cookieParser(credentials.cookieSecret)); // read cookies (needed for auth)
  app.use(bodyParser()); // get information from html forms
 
  // required for passport
@@ -40,7 +40,7 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  app.use(passport.session()); // persistent login sessions
  app.use(flash()); // use connect-flash for flash messages stored in session
 
-// require('./config/passport')(passport); // pass passport for configuration
+ require('./config/passport')(passport); // pass passport for configuration
 
 //database configuration  ===================================================
 var opts = {
@@ -59,7 +59,7 @@ var opts = {
          throw new Error('Unknown execution enviornment: ' + app.get('env'));
  }
 
- var user = require('./models/space.js');
+ var user = require('./models/user.js');
 
 
 //databse prelim loading ============================================
@@ -67,11 +67,8 @@ var opts = {
      if (users.length) return;
 
      new user({
-         id: 1,
          username: 'iharris',
-         password: 'bob',
          playername: 'theDestroyer',
-         email: 'iharris@resc.k12.in.us',
          stationid: 1,
      }).save();
  });

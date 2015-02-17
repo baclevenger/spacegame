@@ -8,25 +8,28 @@
 		<h1>Register</h1>
 	</div>
 </head>
-
+    {{#if error}}
+    <div class="center">{{error}}</div>
+    {{/if}}
 	<p1>
-	<form method="post" action="Register.php">
+	<form method="post" action="/register">
 	
-    <label for="Name">Name:</label>
-    <input type="text" id="Name" name="Name" /><br />
-	
-    <label for="Password">Password:</label>
-    <input type="password" id="Password" name="Password" /><br />
-	
-	<label for="Station">Station Name:</label>
-    <input type="text" id="Station" name="Station" /><br />
+	{{!<label for="Station">Station Name:</label>}}
+    {{!<input type="text" id="Station" name="Station" /><br />}}
 	
     <label for="Email">Email:</label>
     <input type="text" id="Email" name="Email" /><br />
-	
-	<input type="submit" name="submit" value="Register" />
+
+    <label for="Password">Password:</label>
+    <input type="password" id="Password" name="Password" /><br />
+
+    <label for="playerName">Player Name:</label>
+    <input type="text" id="playerName" name="playerName" /><br />
+        	
+	<button type="submit">Register</button> 
     </form>
 	</p1>
+
 
 <div id= "1" class="center">
 	<p2>
@@ -35,12 +38,6 @@
 	</p2>
 	
   </div>
-
-  
-<audio id="playTune" autoplay loop>
-<source src="space.mp3">
-
-
 
 
 <body>
