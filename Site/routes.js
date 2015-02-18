@@ -43,8 +43,8 @@ module.exports = function (app, passport) {
     // process the stationcreate form
 
     app.post('/stationcreate', passport.authenticate('local-signup', {
-        successRedirect: '/profile', // redirect to the secure profile section
-        failureRedirect: '/stationcreate', // redirect back to the signup page if there is an error
+        successRedirect: '/stationcreate', // redirect to the secure profile section
+        failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 
