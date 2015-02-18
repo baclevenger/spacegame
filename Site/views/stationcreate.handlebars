@@ -2,23 +2,29 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="SpaceGame.css">
+    <link rel="stylesheet" type="text/css" href="SpaceGame2.css">
     <div id="1" class="center">
         <title>Unlimited Space</title>
-        <h1>Register</h1>
+        <h1>Create A Station</h1>
     </div>
 </head>
     {{#if error}}
 <div class="center">{{error}}</div>
     {{/if}}
-<p1>
+<p1 class="blocktext">
     <form method="post" action="/stationcreate">
+        
+        <label for="Station">Station Name:</label>
+        <input type="text" id="Station" name="Station" /><br />
 
-        {{!<label for="Station">Station Name:</label>}}
-        {{!<input type="text" id="Station" name="Station" /><br />}}
 
-        {{!<label for="playerName">Player Name:</label>}}
-        {{!<input type="text" id="playerName" name="playerName" /><br />}}
+            <input type="radio" name="race" value="Human">Human<br>
+            <input type="radio" name="race" value="Petrians">Petrians<br>
+            <input type="radio" name="race" value="Allozinates">Allozinates<br>
+            <input type="radio" name="race" value="Poseons">Poseons<br>
+            <input type="radio" name="race" value="(Science People)">Science People<br>
+            <input type="radio" name="race" value="(Insect People)">Insect People<br>
+      
 
         <button type="submit">Create Station</button>
     </form>
