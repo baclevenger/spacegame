@@ -14,10 +14,16 @@ input[type=radio] {
     margin-right: auto;
 }
 
-p1.blocktext{
+ul{
 font-size: 40px;
 color: white;
 font-family: ‘Arial Narrow’, sans-serif;
+list-style-type: none;
+text-align: center;
+}
+
+li {
+text-align: left;
 }
 
 .center {
