@@ -6,7 +6,7 @@ var stationsSchema = mongoose.Schema({
     location: [new Schema({long: Number, lat: Number}, {_id: false})],
     owner: String,
     resources: {
-        gCurrency: Number,
+        currency: Number,
         energy: Number,
         oxygen: Number,
         water: Number,

@@ -1,5 +1,6 @@
 // app/routes.js
 module.exports = function (app, passport) {
+    
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -11,7 +12,7 @@ module.exports = function (app, passport) {
 
     // process the login form
     app.post('/', passport.authenticate('local-login', {
-        successRedirect: '/stationcreate', // redirect to the secure profile section
+        successRedirect: '/profile', // redirect to the secure profile section
         failureRedirect: '/', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -36,8 +37,10 @@ module.exports = function (app, passport) {
     // Station Create ==============================
     // =====================================
     // show the stationcreate form
-    app.get('/stationcreate', function (req, res) {
-        res.render('stationcreate', { error: req.flash('error') });
+    app.get('/stationcreate', isLoggedIn, function (req, res) {
+        res.render('stationcreate', {
+            user: req.user // get the user out of session and pass to template
+        });
     });
 
     // process the stationcreate form
@@ -47,18 +50,26 @@ module.exports = function (app, passport) {
         failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
-
+    
     // =====================================
-    // PROFILE SECTION =====================
+    // Profile ==============================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/stationcreate', isLoggedIn, function (req, res) {
-        res.render('stationcreate', {
+    // show the Profile form
+    app.get('/profile', isLoggedIn, function (req, res) {
+        res.render('/profile', {
             user: req.user // get the user out of session and pass to template
         });
     });
+    
+    // process the profile form
+    
+    app.post('/profile', passport.authenticate('local-signup', {
+        successRedirect: '/profile', // redirect to the secure profile section
+        failureRedirect: '/ ', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }));
 
+   
     // =====================================
     // LOGOUT ==============================
     // =====================================

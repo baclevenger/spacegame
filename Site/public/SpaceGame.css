@@ -15,6 +15,12 @@ background: url("station.jpg") no-repeat center center fixed;
  background-size: cover;
 }
 
+input[type=radio] {
+    width: 3%;
+    height: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .center {
 text-align: center;
@@ -40,10 +46,16 @@ text-shadow: 0 1px 0 #ccc,
 width:100px;height:35px;
 }
 
-ul {
-font-size: 25px;
+ul{
+font-size: 40px;
 color: white;
 font-family: ‘Arial Narrow’, sans-serif;
+list-style-type: none;
+text-align: center;
+}
+
+li {
+text-align: center;
 }
 
 p{
