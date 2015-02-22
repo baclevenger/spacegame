@@ -22,16 +22,18 @@
 <p1>
     <form method="post" action="/stationcreate">
         
+        <div class="center">{{user._id}}</div>
+
         <label for="Station">Station Name:</label>
-        <input type="text" id="Station" name="Station" /><br />
+        <input type="text" id="StationName" name="StationName" /><br />
 
         <ul>
                 <li><input type="radio" name="race" value="Human">Human<br></li>
                 <li><input type="radio" name="race" value="Petrians">Petrians<br></li>
                 <li><input type="radio" name="race" value="Allozinates">Allozinates<br></li>
                 <li><input type="radio" name="race" value="Poseons">Poseons<br></li>
-                <li><input type="radio" name="race" value="(Science People)">Science People<br></li>
-                <li><input type="radio" name="race" value="(Insect People)">Insect People</li>
+                <li><input type="radio" name="race" value="Sciren">Sciren<br></li>
+                <li><input type="radio" name="race" value="Entomoid">Entomoids</li>
       </ul>
 
         <button type="submit">Create Station</button>

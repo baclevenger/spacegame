@@ -36,6 +36,9 @@ module.exports = function (app, passport) {
     // =====================================
     // Station Create ==============================
     // =====================================
+    
+    var Station = require('./models/Station.js');
+    
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
         res.render('stationcreate', {
@@ -45,11 +48,46 @@ module.exports = function (app, passport) {
 
     // process the stationcreate form
 
-    app.post('/stationcreate', passport.authenticate('local-signup', {
-        successRedirect: '/stationcreate', // redirect to the secure profile section
-        failureRedirect: '/register', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));
+
+    app.post('/stationcreate', isLoggedIn, function (req, res) {
+        Station.update(
+            { uID: req.user._id },
+            {
+                name: req.body.StationName,
+                name: req.body.StationName ,
+                race: req.body.race ,
+                location: { X: 1, Y: 1, Z: 1 } ,
+                resources: {
+                    currency: 1000,
+                    energy: 1000,
+                    oxygen: 1000,
+                    water: 1000,
+                    food: 1000,
+                    minerals: 1000,
+                    darkMatter: 1000
+                }, 
+                levels: 1, },
+            { upsert: true},
+            function (err) {
+                if (err) {
+                    console.error(err.stack);
+                    req.session.flash = {
+                        type: 'danger',
+                        intro: 'Ooops!',
+                        message: 'There was an error proccesing your request.',
+                    };
+                    return res.redirect(303, '/stationcreate');
+                }
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Thank you!',
+                    message: 'You will be notified when this vacation is in season.',
+                };
+                return res.redirect(303, '/ingame');
+            }
+        );
+});
+
     
     // =====================================
     // Profile ==============================
