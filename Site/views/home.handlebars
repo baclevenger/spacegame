@@ -4,13 +4,16 @@
 	</div>
 
 	<p1>
-	<form method="post" action="SignIn.php">
+    {{#if error}}
+        <div class="center">{{error}}</div>
+    {{/if}}
+	<form method="post" action="/">
 	
-    <label for="Name">Name:</label>
-    <input type="text" id="Name" name="Name" /><br />
+    <label for="Name">Email:</label>
+    <input type="text" id="email" name="email" /><br />
 	
     <label for="Password">Password:</label>
-    <input type="password" id="Password" name="Password" /><br />
+    <input type="password" id="password" name="password" /><br />
 	
 	<input type="submit" name="submit" value="Log In" />
     </form>

@@ -1,0 +1,54 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="SpaceGame.css">
+
+    <style>
+        html {
+            background: url("station.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+     </style>
+
+    <div id="1" class="center">
+        <title>Unlimited Space</title>
+        <h1>Create A Station</h1>
+    </div>
+</head>
+    {{#if error}}
+<div class="center">{{error}}</div>
+    {{/if}}
+<p1>
+    <form method="post" action="/stationcreate">
+        
+        
+
+        <label for="Station">Station Name:</label>
+        <input type="text" id="StationName" name="StationName" /><br />
+
+        <ul>
+                <li><input type="radio" name="race" value="Human">Human<br></li>
+                <li><input type="radio" name="race" value="Petrians">Petrians<br></li>
+                <li><input type="radio" name="race" value="Allozinates">Allozinates<br></li>
+                <li><input type="radio" name="race" value="Poseons">Poseons<br></li>
+                <li><input type="radio" name="race" value="Sciren">Sciren<br></li>
+                <li><input type="radio" name="race" value="Entomoid">Entomoids</li>
+      </ul>
+
+        <button type="submit">Create Station</button>
+    </form>
+</p1>
+
+
+<div id="1" class="center">
+    <p2>
+        <form action="/">
+            <input type=submit value="Home"><a href="/"></a>
+        </form>
+    </p2>
+
+</div>
+
+
+<body>
