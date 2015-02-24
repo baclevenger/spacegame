@@ -1,22 +1,22 @@
 // app/routes.js
 module.exports = function (app, passport) {
     
-
+    
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-
+    
     app.get('/', function (req, res) {
         res.render('home', { error: req.flash('error') });
     });
-
+    
     // process the login form
     app.post('/', passport.authenticate('local-login', {
-        successRedirect: '/profile', // redirect to the secure profile section
+        successRedirect: '/ingame', // redirect to the secure profile section
         failureRedirect: '/', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
-
+    
     // =====================================
     // register ==============================
     // =====================================
@@ -24,15 +24,15 @@ module.exports = function (app, passport) {
     app.get('/register', function (req, res) {
         res.render('register', { error: req.flash('error') });
     });
-
+    
     // process the register form
-
+    
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect: '/stationcreate', // redirect to the secure profile section
         failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
-
+    
     // =====================================
     // Station Create ==============================
     // =====================================
@@ -45,10 +45,10 @@ module.exports = function (app, passport) {
             user: req.user // get the user out of session and pass to template
         });
     });
-
+    
     // process the stationcreate form
-
-
+    
+    
     app.post('/stationcreate', isLoggedIn, function (req, res) {
         Station.update(
             { uID: req.user._id },
@@ -66,8 +66,9 @@ module.exports = function (app, passport) {
                     minerals: 1000,
                     darkMatter: 1000
                 }, 
-                levels: 1, },
-            { upsert: true},
+                levels: 1,
+            },
+            { upsert: true },
             function (err) {
                 if (err) {
                     console.error(err.stack);
@@ -86,8 +87,8 @@ module.exports = function (app, passport) {
                 return res.redirect(303, '/ingame');
             }
         );
-});
-
+    });
+    
     
     // =====================================
     // Profile ==============================
@@ -106,8 +107,8 @@ module.exports = function (app, passport) {
         failureRedirect: '/ ', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
-
-   
+    
+    
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -115,14 +116,14 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
-
+    
     //custom 404 page
     app.use(function (req, res) {
         res.type('text/plain');
         res.status(404);
         res.send('404 - Not Found');
     });
-
+    
     //custom 500 page
     app.use(function (err, req, res, next) {
         console.error(err.stack);
@@ -131,15 +132,15 @@ module.exports = function (app, passport) {
         res.send('500 - Server Error');
     });
 }
-    // route middleware to make sure a user is logged in
-    function isLoggedIn(req, res, next) {
-
-        // if user is authenticated in the session, carry on 
-        if (req.isAuthenticated())
-            return next();
-
-        // if they aren't redirect them to the home page
-        res.redirect('/');
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+    
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+    
+    // if they aren't redirect them to the home page
+    res.redirect('/');
 
 
     //https://scotch.io/tutorials/easy-node-authentication-setup-and-local 

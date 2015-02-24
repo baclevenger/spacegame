@@ -1,18 +1,27 @@
 
     <div id="1" class="center">
     <title>Infinite Space</title>
-    <h1>Profile</h1>
+    <h1>{{name}}
+     <br>
+     {{race}}
+     </h1>
 </div>
 </head>
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
-<p1>
+<p3>
     <!-- LOCAL INFORMATION -->
-        <strong>id</strong>: <%= user._id %><br>
-        <strong>email</strong>: <%= user.local.email %><br>
-        <strong>password</strong>: <%= user.local.password %>
-</p1>
+    DarkMatter:{{darkMatter}} 
+    Minerals:{{minerals}}
+    Food:{{food}}
+    Water:{{water}}
+    Oxygen:{{oxygen}}
+    Energy:{{energy}}
+    Galactic Currency:{{currency}}
+    Station Levels:{{levels}}
+    Location (x,y,z):{{X}},{{Y}},{{Z}}
+</p3>
 
 
 <div id="1" class="center">
