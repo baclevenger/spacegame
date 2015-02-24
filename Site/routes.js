@@ -1,7 +1,6 @@
 // app/routes.js
 module.exports = function (app, passport) {
     
-    
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -54,7 +53,6 @@ module.exports = function (app, passport) {
             { uID: req.user._id },
             {
                 name: req.body.StationName,
-                name: req.body.StationName ,
                 race: req.body.race ,
                 location: { X: 1, Y: 1, Z: 1 } ,
                 resources: {
@@ -108,7 +106,6 @@ module.exports = function (app, passport) {
         failureFlash: true // allow flash messages
     }));
     
-    
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -117,6 +114,41 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
     
+    
+    // =====================================
+    // ingame  ==============================
+    // =====================================
+    
+    //works 
+    var station = require('./models/Station.js');
+    app.get('/ingame', isLoggedIn, function (req, res) {
+        
+        
+        //not working, doesn't crash now, but doesn't display from the database. I think it is the 'name' part
+        station.find({ StationName: 'name' }, function (err, stations) {
+            var context = {
+                stations: stations.map(function (station) {
+                    return {
+                        DarkMatter: station.darkMatter,
+                        Minerals: station.minerals,
+                        Food: station.food,
+                        Water: station.water,
+                        Oxygen: station.oxygen,
+                        Energy: station.energy,
+                        Galactic_Currency: station.currency,
+                        Station_Levels: station.levels
+                    }
+                })
+            };
+        });
+
+        
+//works
+        res.render('ingame', {
+        })
+    });
+    
+
     //custom 404 page
     app.use(function (req, res) {
         res.type('text/plain');
@@ -131,17 +163,20 @@ module.exports = function (app, passport) {
         res.status(500);
         res.send('500 - Server Error');
     });
+    
+    //use to be a '}' here, taking it out seemed to help
 }
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
     
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-    
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+    // route middleware to make sure a user is logged in
+    function isLoggedIn(req, res, next) {
+        
+        // if user is authenticated in the session, carry on 
+        if (req.isAuthenticated())
+            return next();
+        
+        // if they aren't redirect them to the home page
+        res.redirect('/');
 
 
     //https://scotch.io/tutorials/easy-node-authentication-setup-and-local 
-}
+    }
