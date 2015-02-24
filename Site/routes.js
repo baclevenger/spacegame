@@ -124,10 +124,11 @@ module.exports = function (app, passport) {
     app.get('/ingame', isLoggedIn, function (req, res) {
         
         
+        
         //not working, doesn't crash now, but doesn't display from the database. I think it is the 'name' part
-        station.find({ StationName: 'name' }, function (err, stations) {
+        station.find({ name: StationName }, function (err, stations) {
             var context = {
-                stations: stations.map(function (station) {
+                stations: stations.map(function(station) {
                     return {
                         DarkMatter: station.darkMatter,
                         Minerals: station.minerals,
@@ -141,9 +142,9 @@ module.exports = function (app, passport) {
                 })
             };
         });
-
         
-//works
+        
+        //works
         res.render('ingame', {
         })
     });
