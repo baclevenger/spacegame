@@ -120,34 +120,29 @@ module.exports = function (app, passport) {
     // =====================================
     
     //works 
-    var station = require('./models/Station.js');
+    var Station = require('./models/Station.js');
     app.get('/ingame', isLoggedIn, function (req, res) {
         
         
         
         //not working, doesn't crash now, but doesn't display from the database. I think it is the 'name' part
-        station.find({ name: StationName }, function (err, stations) {
+        Station.findOne({ name:"bill"}, function (err, station) {
+         //   console.log(station.levels);
             var context = {
-                stations: stations.map(function(station) {
-                    return {
-                        DarkMatter: station.darkMatter,
-                        Minerals: station.minerals,
-                        Food: station.food,
-                        Water: station.water,
-                        Oxygen: station.oxygen,
-                        Energy: station.energy,
-                        Galactic_Currency: station.currency,
-                        Station_Levels: station.levels
-                    }
-                })
-            };
+                user: req.user, 
+                darkMatter: station.resources.darkMatter,
+                minerals: station.minerals,
+                food: station.food,
+                water: station.water,
+                oxygen: station.oxygen,
+                energy: station.energy,
+                currency: station.currency,
+                levels: station.levels
+            }
+            res.render('ingame', context);
+            });
         });
-        
-        
-        //works
-        res.render('ingame', {
-        })
-    });
+    
     
 
     //custom 404 page
