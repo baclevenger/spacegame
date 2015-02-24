@@ -122,22 +122,22 @@ module.exports = function (app, passport) {
     //works 
     var Station = require('./models/Station.js');
     app.get('/ingame', isLoggedIn, function (req, res) {
-        
-        
-        
-        //not working, doesn't crash now, but doesn't display from the database. I think it is the 'name' part
-        Station.findOne({ name:"bill"}, function (err, station) {
+       
+        Station.findOne({ uid: req.user._id.toString }, function (err, station) {
          //   console.log(station.levels);
             var context = {
                 user: req.user, 
                 darkMatter: station.resources.darkMatter,
-                minerals: station.minerals,
-                food: station.food,
-                water: station.water,
-                oxygen: station.oxygen,
-                energy: station.energy,
-                currency: station.currency,
-                levels: station.levels
+                minerals: station.resources.minerals,
+                food: station.resources.food,
+                water: station.resources.water,
+                oxygen: station.resources.oxygen,
+                energy: station.resources.energy,
+                currency: station.resources.currency,
+                levels: station.levels,
+                X: station.location.X,
+                Y: station.location.Y, 
+                Z: station.location.Z,
             }
             res.render('ingame', context);
             });

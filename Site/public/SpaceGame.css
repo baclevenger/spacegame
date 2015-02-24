@@ -58,6 +58,16 @@ li {
 text-align: center;
 }
 
+ul.resources{
+font-size: 12px;
+color: white;
+font-family: ‘Arial Narrow’, sans-serif;
+list-style-type: none;
+border-style: solid;
+border-width: 1px;
+}
+
+
 p{
 font-size: 15px;
 color: white;
