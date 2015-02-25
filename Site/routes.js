@@ -126,7 +126,8 @@ module.exports = function (app, passport) {
         Station.findOne({ uid: req.user._id.toString }, function (err, station) {
          //   console.log(station.levels);
             var context = {
-                user: req.user, 
+                user: req.user.playername, 
+                race: station.race,
                 darkMatter: station.resources.darkMatter,
                 minerals: station.resources.minerals,
                 food: station.resources.food,

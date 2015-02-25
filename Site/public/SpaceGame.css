@@ -58,13 +58,11 @@ li {
 text-align: center;
 }
 
-ul.resources{
+li.resources{
+display: inline; 
 font-size: 12px;
 color: white;
 font-family: ‘Arial Narrow’, sans-serif;
-list-style-type: none;
-border-style: solid;
-border-width: 1px;
 }
 
 
@@ -97,6 +95,18 @@ color: #F8F8F8;
 font-family: ‘Arial Narrow’, sans-serif;
 }
 	  
+
+ div#banner { 
+       top: 0; 
+       left: 0; 
+       width: 100%; 
+       position: absolute; 
+     }
+     div#banner-content { 
+       width: 800px; 
+       margin: 0 auto; 
+       padding: 10px; 
+     }
 	  
 	  
 	  
