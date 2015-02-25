@@ -62,7 +62,7 @@ module.exports = function (app, passport) {
                     water: 1000,
                     food: 1000,
                     minerals: 1000,
-                    darkMatter: 1000
+                    darkMatter: 20
                 }, 
                 levels: 1,
             },
@@ -123,10 +123,10 @@ module.exports = function (app, passport) {
     var Station = require('./models/Station.js');
     app.get('/ingame', isLoggedIn, function (req, res) {
        
-        Station.findOne({ uid: req.user._id.toString }, function (err, station) {
+        Station.findOne({ uID: req.user._id }, function (err, station) {
          //   console.log(station.levels);
             var context = {
-                user: req.user.playername, 
+                stationname: station.name, 
                 race: station.race,
                 darkMatter: station.resources.darkMatter,
                 minerals: station.resources.minerals,

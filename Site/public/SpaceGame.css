@@ -100,13 +100,13 @@ font-family: ‘Arial Narrow’, sans-serif;
        top: 0; 
        left: 0; 
        width: 100%; 
-       position: absolute; 
-     }
-     div#banner-content { 
+       position: absolute;
        width: 800px; 
        margin: 0 auto; 
-       padding: 10px; 
+       padding: 10px;  
      }
+    
+    
 	  
 	  
 	  
