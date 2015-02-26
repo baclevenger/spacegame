@@ -1,18 +1,25 @@
-
-html { 
+body.login { 
   background: url("space1.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+}	  
 
-.station {
+body.station {
 background: url("station.jpg") no-repeat center center fixed;
 -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;
+}
+
+body.register {
+    background: url("charater.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 input[type=radio] {
@@ -58,6 +65,14 @@ li {
 text-align: center;
 }
 
+li.resources{
+display: inline; 
+font-size: 12px;
+color: white;
+font-family: ‘Arial Narrow’, sans-serif;
+}
+
+
 p{
 font-size: 15px;
 color: white;
@@ -80,7 +95,57 @@ p2{
    -webkit-transition: background .50s ease-in-out;
    }
 
+p3{
+font-size: 15px;
+text-align: center;
+color: #F8F8F8;
+font-family: ‘Arial Narrow’, sans-serif;
+}
 	  
-	  
-	  
-	  
+
+ div#banner { 
+       top: 0; 
+       left: 0; 
+       width: 100%; 
+       position: absolute;
+       width: 800px; 
+       margin: 0 auto; 
+       padding: 10px;  
+     }
+    
+    
+body.Human { background: url("human.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Petrians { background: url("petrians.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Allozinates { background: url("allozinates.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Poseons { background: url("poseons.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+  
+body.Sciren { background: url("sciren.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+ 
+body.Entomoids { background: url("entomoids.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}

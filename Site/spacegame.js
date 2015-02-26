@@ -64,34 +64,7 @@ var opts = {
 var user = require('./models/user.js');
 var Station = require('./models/Station.js');
 
- user.find(function (err, users) {
-     if (users.length) return;
 
-     new user({
-         username: 'iharris',
-        playername: 'theDestroyer',
-     }).save();
- });
-
-Station.find(function (err, Stations) {
-    if (Stations.length) return;
-    
-    new Station({
-        name: 'iharris' ,
-        race: 'Human' ,
-        location: { X: 1, Y: 1, Z: 1 } ,
-        resources: {
-            currency: 1000,
-            energy: 1000,
-            oxygen: 1000,
-            water: 1000,
-            food: 1000,
-            minerals: 1000,
-            darkMatter: 1000
-        }, 
-          levels: 1,
-    }).save();
-});
 
 
 //routes =====================================================================
