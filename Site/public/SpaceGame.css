@@ -1,18 +1,25 @@
-
-html { 
+body.login { 
   background: url("space1.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+}	  
 
-.station {
+body.station {
 background: url("station.jpg") no-repeat center center fixed;
 -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;
+}
+
+body.register {
+    background: url("charater.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 input[type=radio] {
@@ -107,6 +114,38 @@ font-family: ‘Arial Narrow’, sans-serif;
      }
     
     
-	  
-	  
-	  
+body.Human { background: url("human.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Petrians { background: url("petrians.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Allozinates { background: url("allozinates.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+
+body.Poseons { background: url("poseons.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+  
+body.Sciren { background: url("sciren.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}
+ 
+body.Entomoids { background: url("entomoids.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;}

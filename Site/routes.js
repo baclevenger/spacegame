@@ -6,7 +6,7 @@ module.exports = function (app, passport) {
     // =====================================
     
     app.get('/', function (req, res) {
-        res.render('home', { error: req.flash('error') });
+        res.render('home', { error: req.flash('error'), bclass:"login" });
     });
     
     // process the login form
@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
     // =====================================
     // show the register form
     app.get('/register', function (req, res) {
-        res.render('register', { error: req.flash('error') });
+        res.render('register', { error: req.flash('error'), bclass: "register" });
     });
     
     // process the register form
@@ -40,7 +40,7 @@ module.exports = function (app, passport) {
     
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
-        res.render('stationcreate', {
+        res.render('stationcreate', {bclass: "station",
             user: req.user // get the user out of session and pass to template
         });
     });
@@ -126,6 +126,7 @@ module.exports = function (app, passport) {
         Station.findOne({ uID: req.user._id }, function (err, station) {
          //   console.log(station.levels);
             var context = {
+                bclass:station.race,
                 stationname: station.name, 
                 race: station.race,
                 darkMatter: station.resources.darkMatter,
