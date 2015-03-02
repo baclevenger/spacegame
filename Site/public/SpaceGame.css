@@ -185,6 +185,7 @@ left:50px;
 -ms-transition: all .3s ease;
 -o-transition: all .3s ease;
 transition: all .3s ease;
+
 }
 #button:hover > #two {
 display:block;
@@ -202,6 +203,7 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
 
 #two.petrians{
@@ -211,6 +213,7 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
 
 #two.allozinates{
@@ -220,6 +223,7 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
 
 #two.poseons{
@@ -229,6 +233,7 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
 
 #two.sciren{
@@ -238,6 +243,7 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
 
 #two.entomoid{
@@ -247,4 +253,5 @@ width:350px;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background:rgba(0,0,0,0.5);
 }
