@@ -1,7 +1,10 @@
 	<div id= "1" class="center">
 		<title>Unlimited Space</title>
-		<h1>Infinite Space</h1>
+		<h1 class="center">Infinite Space</h1>
 	</div>
+
+<br>
+<br>
 
 	<p1>
     {{#if error}}
@@ -9,20 +12,22 @@
     {{/if}}
 	<form method="post" action="/">
 	
-    <label for="Name">Email:</label>
-    <input type="text" id="email" name="email" /><br />
+    <label for="Name"></label>
+        <input type="text" id="email" name="email" placeholder="Enter email" /><br />
 	
-    <label for="Password">Password:</label>
-    <input type="password" id="password" name="password" /><br />
+
+    <label for="Password"></label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" /><br />
+        <br>    <button method="post" action="/"  type="submit" class="btn btn-default">Sign In</button>
 	
-	<input type="submit" name="submit" value="Log In" />
     </form>
 	</p1>
 
 
 <div id= "1" class="center">
 	<p2>
-	<FORM action="register"><INPUT type=submit value="Register"><a href="register" ></a>
+       
+	<FORM action="register"><button type="submit" class="btn btn-default">Register</button>
 	</FORM>
 	</p2>
 	

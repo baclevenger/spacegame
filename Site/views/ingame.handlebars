@@ -1,43 +1,41 @@
 
     <div id="1" class="center"></div>
     <title>Infinite Space</title>
+<p3>
+    <!-- LOCAL INFORMATION -->
 
+    <div class="page-header">
+        <ul id="banner">
+
+            <li class="resources">DarkMatter:{{darkMatter}}</li>
+            <li class="resources">Minerals:{{minerals}}</li>
+            <li class="resources">Food:{{food}}</li>
+            <li class="resources"> Water:{{water}}</li>
+            <li class="resources">Oxygen:{{oxygen}}</li>
+            <li class="resources">Energy:{{energy}}</li>
+            <li class="resources">Galactic Currency:{{currency}}</li>
+            <li class="resources">Station Levels:{{levels}}</li>
+            <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
+
+        </ul>
+    </div>
+</p3>
   <h1 class="center">
-    {{name}}
-    <br>
     {{stationname}}
         <br>
-    {{race}}
-        <br>
-    {{uid}}
 </h1>
 
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
  
-<p3>
-    <!-- LOCAL INFORMATION -->
-    <ul id="banner">
-        
-                <li class="resources">DarkMatter:{{darkMatter}}</li>
-                <li class="resources">Minerals:{{minerals}}</li>
-                <li class="resources">Food:{{food}}</li>
-                <li class="resources"> Water:{{water}}</li>
-                <li class="resources">Oxygen:{{oxygen}}</li>
-                <li class="resources">Energy:{{energy}}</li>
-                <li class="resources">Galactic Currency:{{currency}}</li>
-                <li class="resources">Station Levels:{{levels}}</li>
-                <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
-   
-    </ul>
-</p3>
+
 
 
 <div id="1" class="center">
     <p2>
         <a href="/logout">
-            <button>LogOut</button>
+            <button type="submit" class="btn btn-default">Log Out</button>
         </a>
     </p2>
 

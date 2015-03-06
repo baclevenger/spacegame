@@ -12,6 +12,7 @@ background: url("station.jpg") no-repeat center center fixed;
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;
+
 }
 
 body.register {
@@ -23,10 +24,11 @@ body.register {
 }
 
 
+
 .center {
 text-align: center;
 color: #F8F8F8;
-font-size: 45px;
+font-size: 70px;
 font-family: ‘Arial Narrow’, sans-serif;
 text-shadow: 0 1px 0 #ccc,
                0 2px 0 #c9c9c9,
@@ -44,8 +46,8 @@ text-shadow: 0 1px 0 #ccc,
 
 
 input[type=radio] {
-    width: 8%;
-    height: 2em;
+    width: 10%;
+    height: 1em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -56,6 +58,7 @@ display: inline;
 font-size: 12px;
 color: white;
 font-family: ‘Arial Narrow’, sans-serif;
+border: 2px solid white;
 }
 
 
@@ -67,11 +70,11 @@ font-family: ‘Arial Narrow’, sans-serif;
 
 
 p1{
-font-size: 25px;
+font-size: 20px;
 text-align: center;
-color: #F8F8F8;
 font-family: ‘Arial Narrow’, sans-serif;
 }
+
 
 p2{
    font-size:25px;

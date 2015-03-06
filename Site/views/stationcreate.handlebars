@@ -12,14 +12,16 @@
     {{#if error}}
 <div class="center">{{error}}</div>
     {{/if}}
+
+
 <p1>
     <form method="post" action="/stationcreate">
         
         
+        
 
-        <label for="Station">Station Name:</label>
-        <input type="text" id="StationName" name="StationName" /><br />
-
+        <label for="Station"></label>
+        <input type="text" id="StationName" name="StationName" placeholder="Enter A Station Name" /><br />
 
         <ul>
 
@@ -57,14 +59,14 @@
 
         </ul>
 
-        <button type="submit">Create Station</button>
+        <button type="submit" class="btn btn-default">Create Station</button>
     </form>
 </p1>
 
 <div id="1" class="center">
     <p2>
         <form action="/">
-            <input type=submit value="Home"><a href="/"></a>
+            <button type="submit" class="btn btn-default">Home</button><a href="/"></a>
         </form>
     </p2>
 

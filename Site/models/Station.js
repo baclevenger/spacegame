@@ -9,6 +9,38 @@ var stationSchema = mongoose.Schema({
         Y: Number,
         Z: Number
     },
+level:{
+        0: {
+
+        },   
+        
+        1: {
+            slot1: {
+                installation: mongoose.Schema.ObjectId, slot2: mongoose.Schema.ObjectId, slot3: mongoose.Schema.ObjectId
+            },
+            slot2: {
+
+            },
+            slot3: {
+
+            },
+            slot4: {
+
+            },
+            slot5: {
+
+            },
+            slot6: {
+
+            },
+            slot7: {
+
+            },
+            slot8: {
+
+            }
+        }   
+},
     resources: {
         currency: Number,
         energy: Number,
