@@ -154,7 +154,7 @@ body.Sciren { background: url("sciren.jpg") no-repeat center center fixed;
 
 }
  
-body.Entomoids { background: url("entomoids.jpg") no-repeat center center fixed;
+body.Entomoid { background: url("entomoids.jpg") no-repeat center center fixed;
 -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
@@ -261,9 +261,9 @@ width:350px;
 }
 
 #two.entomoid{
-    background: url("entomoids.jpg") no-repeat center;
-    color:white;
-    -webkit-background-size: cover;
+   background: url("entomoids.jpg") no-repeat center;
+   color:white;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;

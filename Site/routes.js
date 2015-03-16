@@ -93,13 +93,31 @@ module.exports = function (app, passport) {
     // =====================================
     // show the Profile form
     app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('profile', {
-            user: req.user, // get the user out of session and pass to template
-            bclass: "profile"
-
-        });
-    });
+      //  res.render('profile', {
+        //    user: req.user, // get the user out of session and pass to template
+          //  bclass: "profile"
+       // });
     
+    
+    
+    //not working 
+    
+    Station.findOne({ uID: req.user._id }, function (err, station) {
+        var context = {
+            bclass: station.race,
+            stationname: station.name, 
+            race: station.race,
+            darkMatter: station.resources.darkMatter,
+            levels: station.levels,
+            X: station.location.X,
+           Y: station.location.Y, 
+           Z: station.location.Z,
+        }
+       res.render('profile', context);
+    });
+        
+    });
+
     // process the profile form
     
     app.post('/profile', passport.authenticate('local-signup', {
