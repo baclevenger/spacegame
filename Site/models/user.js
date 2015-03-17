@@ -8,7 +8,8 @@ var bcrypt = require('bcrypt-nodejs');
 var usersSchema = mongoose.Schema({
 	username: String,
 	playername: String,
-	stationid: Number,
+    stationid: Number,
+    maxstations: number,
 	local            : {
 	    email        : String,
 	    password     : String,
