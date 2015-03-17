@@ -66,6 +66,7 @@ module.exports = function (passport) {
                     newUser.playername = req.body.PlayerName;
                     newUser.local.email = Email;
                     newUser.local.password = newUser.generateHash(Password);
+                    newUser.maxstations = 1;
 
                     // save the user
                     newUser.save(function (err) {

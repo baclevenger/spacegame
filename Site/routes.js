@@ -40,9 +40,14 @@ module.exports = function (app, passport) {
     
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
+        
+        //start if
         res.render('stationcreate', {bclass: "station",
             user: req.user // get the user out of session and pass to template
         });
+        //else
+        //logout
+
     });
     
     // process the stationcreate form

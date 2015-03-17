@@ -9,7 +9,7 @@ var usersSchema = mongoose.Schema({
 	username: String,
 	playername: String,
     stationid: Number,
-    maxstations: number,
+    maxstations: Number,
 	local            : {
 	    email        : String,
 	    password     : String,
