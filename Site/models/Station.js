@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+var Schema = mongoose.Schema;
+
 var stationSchema = mongoose.Schema({
     uID: mongoose.Schema.ObjectId,
     name: String,
@@ -10,111 +12,25 @@ var stationSchema = mongoose.Schema({
         Z: Number
     },
     level:{
-            0: {
+        0: {
 
-            },   
-        
-            1: {
-                slot1: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot2: {
-                    installation: mongoose.Schema.ObjectId, 
-                },
-                slot3: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot4: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot5: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot6: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot7: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot8: {
-                    installation: mongoose.Schema.ObjectId,
-                }
-            },
+        },   
+        1: [{
+            type: Schema.Types.ObjectId,
+            ref: 'installation'
+        }],
 
-            2: {
-            slot1: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot2: {
-                installation: mongoose.Schema.ObjectId, 
-                        },
-            slot3: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot4: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot5: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot6: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot7: {
-                installation: mongoose.Schema.ObjectId,
-                        },
-            slot8: {
-                installation: mongoose.Schema.ObjectId,
-                    },
-            slot9: {
-                 installation: mongoose.Schema.ObjectId,
-                        },
-            slot10: {
-                installation: mongoose.Schema.ObjectId,
-                        }
-                },
+        2: [{
+            type: Schema.Types.ObjectId,
+            ref: 'installation'
+        }],
 
-            3: {
-                slot1: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot2: {
-                    installation: mongoose.Schema.ObjectId, 
-                },
-                slot3: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot4: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot5: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot6: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot7: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot8: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot9: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot10: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot11: {
-                    installation: mongoose.Schema.ObjectId,
-                },
-                slot12: {
-                    installation: mongoose.Schema.ObjectId,
-                }
-            }      
-
+        3: [{
+            type: Schema.Types.ObjectId,
+            ref: 'installation'
+        }],
+              
     },
-
     resources: {
         currency: Number,
         energy: Number,
