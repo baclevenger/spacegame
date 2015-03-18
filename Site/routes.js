@@ -37,17 +37,24 @@ module.exports = function (app, passport) {
     // =====================================
     
     var Station = require('./models/Station.js');
-    
+    var maxstations = 1;
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
         
-        //start if
-        res.render('stationcreate', {bclass: "station",
-            user: req.user // get the user out of session and pass to template
-        });
+        //start if 
+        if (maxstations > 1) {
+            
+            res.render('stationcreate', {
+                bclass: "station",
+                user: req.user // get the user out of session and pass to template
+            });
+        }
         //else
+        else {
         //logout
-
+            req.logout();
+            res.redirect('/');
+        }
     });
     
     // process the stationcreate form
@@ -104,8 +111,6 @@ module.exports = function (app, passport) {
        // });
     
     
-    
-    //not working 
     
     Station.findOne({ uID: req.user._id }, function (err, station) {
         var context = {
