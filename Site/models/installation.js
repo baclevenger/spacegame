@@ -31,5 +31,5 @@ var installationSchema = mongoose.Schema({
 
 
 });
-var Installation = mongoose.model('Installation', stationSchema);
+var Installation = mongoose.model('Installation', installationSchema);
 module.exports = Installation;
