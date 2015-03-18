@@ -1,5 +1,7 @@
 ﻿var mongoose = require('mongoose');
 
+var Schema = mongoose.Schema;
+
 var installationSchema = mongoose.Schema({
     name: String,
     description: String,
