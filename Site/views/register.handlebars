@@ -1,52 +1,51 @@
 <head>
 <link rel="stylesheet" type="text/css" href="SpaceGame.css">
-
+</head>
 	<div id= "1" class="center">
 		<title>Infinite Space</title>
 		<h1>Register</h1>
 	</div>
     <script type="text/javascript">
         function validateForm() {
-            var x = document.forms["myForm"]["Playername"].value;
-            var y = document.forms["myForm"]["Password"].value;
-            var z = document.forms["myForm"]["Email"].value;
+            var x = document.forms["myForm"]["fname"].value;
+            var y = document.forms["myForm"]["fpass"].value;
+            var z = document.forms["myForm"]["fmail"].value;
             if (x == null || x == "") {
                 alert("Name must be filled out");
                 return false;
             } else if (y == null || y == "") {
                 alert("password must be filled out");
                 return false;
-            } else if (z == '' || z.indexOf('@') == -1 || z.indexOf('.com ') == -1) {
+            } else if (z == '' || z.indexOf('@') == -1 || z.indexOf('.') == -1) {
                 alert("please use valid email");
                 return false;
+            } else {
+                return true;
             }
         }
     </script>
-    </head>
     {{#if error}}
     <div class="center">{{error}}</div>
     {{/if}}
 	<p1>
-        <form name="myForm" method="post" onsubmit="return validateForm()" action="/register">
+            <form name="myForm" method="post" onsubmit="return validateForm()" action="/register">
 
-            <label for="PlayerName">Player Name:</label>
-            <input type="text" id="PlayerName" name="PlayerName" /><br />
-
-            <label for="Email">Email:</label>
-            <input type="text" id="Email" name="Email" /><br />
-
-            <label for="Password">Password:</label>
-            <input type="password" id="Password" name="Password" /><br />
-
-            <button type="submit" value="Submit">Register</button>
-        </form>
+                Email: <input type="text" name="fmail">
+                </br>
+                Name: <input type="text" name="fname">
+                </br>
+                Password: <input type="password" name="fpass">
+                </br>
+                <button type="submit" value="Submit">Submit</button>
+        </form>  
 	</p1>
 
 
-<div id= "1" class="center">
+<!--<div id= "1" class="center">
 	<p2>
 	<FORM action="/"><INPUT type=submit value="LogIn"><a href="/" ></a>
 	</FORM>
 	</p2>
 
   </div>
+    -->
