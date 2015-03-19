@@ -176,6 +176,69 @@ module.exports = function (app, passport) {
         });
     
     
+    
+    // =====================================
+    // install  ==============================
+    // =====================================
+    
+    var Station = require('./models/Station.js');
+    var Installation = require('./models/installation.js');
+    app.get('/install', isLoggedIn, function (req, res) {
+        Installation.find({}, function (err, installations){
+            var context = {
+                installations: installations.map(function (installation) {
+                    return {
+                        name: installation.name,
+                        description: installation.description,
+                        graphic: installation.graphic,
+                        currency: Number,
+                        energy: Number,
+                        oxygen: Number,
+                        water: Number,
+                        food: Number,
+                        minerals: Number,
+                        darkMatter: Number
+                        
+                        //delta: {
+                        //    currency: Number,
+                        //    energy: Number,
+                        //    oxygen: Number,
+                        //    water: Number,
+                        //    food: Number,
+                        //    minerals: Number,
+                        //    darkMatter: Number
+                        //}
+
+                    }
+                })
+            };
+            res.render('install', context);
+        });
+              
+        
+        //Station.findOne({ uID: req.user._id }, function (err, station) {
+        //    //   console.log(station.levels);
+        //    var context = {
+        //        bclass: station.race,
+        //        stationname: station.name, 
+        //        race: station.race,
+        //        darkMatter: station.resources.darkMatter,
+        //        minerals: station.resources.minerals,
+        //        food: station.resources.food,
+        //        water: station.resources.water,
+        //        oxygen: station.resources.oxygen,
+        //        energy: station.resources.energy,
+        //        currency: station.resources.currency,
+        //        levels: station.levels,
+        //        X: station.location.X,
+        //        Y: station.location.Y, 
+        //        Z: station.location.Z,
+        //    }
+        //    res.render('ingame', context);
+        //});
+    });
+          
+    
 
     //custom 404 page
     app.use(function (req, res) {
