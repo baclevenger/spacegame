@@ -199,6 +199,7 @@ module.exports = function (app, passport) {
                         minerals: Number,
                         darkMatter: Number
                         
+
                         //delta: {
                         //    currency: Number,
                         //    energy: Number,
