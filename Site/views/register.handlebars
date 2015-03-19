@@ -5,24 +5,41 @@
 		<title>Infinite Space</title>
 		<h1>Register</h1>
 	</div>
-</head>
+    <script type="text/javascript">
+        function validateForm() {
+            var x = document.forms["myForm"]["Playername"].value;
+            var y = document.forms["myForm"]["Password"].value;
+            var z = document.forms["myForm"]["Email"].value;
+            if (x == null || x == "") {
+                alert("Name must be filled out");
+                return false;
+            } else if (y == null || y == "") {
+                alert("password must be filled out");
+                return false;
+            } else if (z == '' || z.indexOf('@') == -1 || z.indexOf('.com ') == -1) {
+                alert("please use valid email");
+                return false;
+            }
+        }
+    </script>
+    </head>
     {{#if error}}
     <div class="center">{{error}}</div>
     {{/if}}
 	<p1>
-	<form method="post" action="/register">
-	
-    <label for="PlayerName">Player Name:</label>
-    <input type="text" id="PlayerName" name="PlayerName" /><br />
+        <form name="myForm" method="post" onsubmit="return validateForm()" action="/register">
 
-    <label for="Email">Email:</label>
-    <input type="text" id="Email" name="Email" /><br />
+            <label for="PlayerName">Player Name:</label>
+            <input type="text" id="PlayerName" name="PlayerName" /><br />
 
-    <label for="Password">Password:</label>
-    <input type="password" id="Password" name="Password" /><br />
-        	
-	<button type="submit">Register</button> 
-    </form>
+            <label for="Email">Email:</label>
+            <input type="text" id="Email" name="Email" /><br />
+
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" /><br />
+
+            <button type="submit" value="Submit">Register</button>
+        </form>
 	</p1>
 
 
@@ -31,5 +48,5 @@
 	<FORM action="/"><INPUT type=submit value="LogIn"><a href="/" ></a>
 	</FORM>
 	</p2>
-	
+
   </div>
