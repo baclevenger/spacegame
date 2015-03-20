@@ -73,7 +73,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "Solar Panel",
         description: "basic production unit of energy",
-        graphic: "link",
+        graphic: "/images/images.jpg",
         cost: {
             currency: 16,
             energy: 5,
@@ -94,12 +94,90 @@ installation.find(function (err, installations) {
         }
     }).save();
     
+    //new installation==============================================================================
     
+    new installation({
+        name: "Hydroxification center",
+        description: "advanced production unit of water",
+        graphic: "/images/images.jpg",
+        cost: {
+            currency: 1600,
+            energy: 500,
+            oxygen: 300,
+            water: 300,
+            food: 1000,
+            minerals: 2000,
+            darkMatter: 0,
+        },
+        delta: {
+            currency: 0,
+            energy: 2500,
+            oxygen: 0,
+            water: 5000,
+            food: 0,
+            minerals: 0,
+            darkMatter: 0
+        }
+    }).save();
+    
+    //new installation==============================================================================
+    
+    new installation({
+        name: "osmosis chamber",
+        description: "moderate production unit of water",
+        graphic: "/images/images.jpg",
+        cost: {
+            currency: 160,
+            energy: 50,
+            oxygen: 30,
+            water: 30,
+            food: 100,
+            minerals: 200,
+            darkMatter: 0,
+        },
+        delta: {
+            currency: 0,
+            energy: 250,
+            oxygen: 0,
+            water: 500,
+            food: 0,
+            minerals: 0,
+            darkMatter: 0
+        }
+    }).save();
+    
+    //new installation==============================================================================
+    
+    new installation({
+        name: "mining hub",
+        description: "basic production unit of minerals",
+        graphic: "/images/images.jpg",
+        cost: {
+            currency: 160,
+            energy: 50,
+            oxygen: 30,
+            water: 30,
+            food: 100,
+            minerals: 200,
+            darkMatter: 0,
+        },
+        delta: {
+            currency: 0,
+            energy: 250,
+            oxygen: 0,
+            water: 0,
+            food: 0,
+            minerals: 0,
+            darkMatter: 0
+        }
+    }).save();
+    
+    //new installation==============================================================================
     
     new installation({
         name: "hydro plant",
         description: "basic production unit of water",
-        graphic: "link",
+        graphic: "/images/images.jpg",
         cost: {
             currency: 16,
             energy: 5,
