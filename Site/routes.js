@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
     app.post('/', passport.authenticate('local-login', {
         successRedirect: '/ingame', // redirect to the secure profile section
         failureRedirect: '/', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
+        failureFlash: false // allow flash messages
     }));
     
     // =====================================
@@ -21,6 +21,7 @@ module.exports = function (app, passport) {
     // =====================================
     // show the register form
     app.get('/register', function (req, res) {
+        
         res.render('register', { error: req.flash('error'), bclass: "register" });
     });
     
@@ -29,7 +30,7 @@ module.exports = function (app, passport) {
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect: '/stationcreate', // redirect to the secure profile section
         failureRedirect: '/register', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
+        failureFlash: false // allow flash messages
     }));
     
     // =====================================
@@ -66,7 +67,7 @@ module.exports = function (app, passport) {
                 }, 
                 levels: 1,
             },
-            { upsert: true },
+            { upsert: false },
             function (err) {
                 if (err) {
                     console.error(err.stack);
@@ -103,7 +104,7 @@ module.exports = function (app, passport) {
     app.post('/profile', passport.authenticate('local-signup', {
         successRedirect: '/profile', // redirect to the secure profile section
         failureRedirect: '/ ', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
+        failureFlash: false // allow flash messages
     }));
     
     // =====================================
