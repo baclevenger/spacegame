@@ -191,13 +191,13 @@ module.exports = function (app, passport) {
                         name: installation.name,
                         description: installation.description,
                         graphic: installation.graphic,
-                        currency: Number,
-                        energy: Number,
-                        oxygen: Number,
-                        water: Number,
-                        food: Number,
-                        minerals: Number,
-                        darkMatter: Number
+                        currency: installation.currency,
+                        energy: installation.energy,
+                        oxygen: installation.oxygen,
+                        water: installation.water,
+                        food: installation.food,
+                        minerals: installation.minerals,
+                        darkMatter: installation.darkMatter
                         
 
                         //delta: {
