@@ -6,7 +6,7 @@ module.exports = function (app, passport) {
     // =====================================
     
     app.get('/', function (req, res) {
-        res.render('home', { error: req.flash('error'), bclass:"login" });
+        res.render('home', { error: req.flash('error'), bclass: "login" });
     });
     
     // process the login form
@@ -37,12 +37,18 @@ module.exports = function (app, passport) {
     // =====================================
     
     var Station = require('./models/Station.js');
-    var maxstations = 1;
+    var user = require('./models/user.js');
+    
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
-        
+        var Station = require('./models/Station.js');
+        var maxstations = { maxstations: req.user.maxstations };
+        var stationcount = { stationcount: req.user.stationcount };
+        //console test for station count
+        console.log(stationcount);
+
         //start if 
-        if (maxstations > 1) {
+        if (maxstations <= stationcount) {
             
             res.render('stationcreate', {
                 bclass: "station",
@@ -51,7 +57,7 @@ module.exports = function (app, passport) {
         }
         //else
         else {
-        //logout
+            //logout
             req.logout();
             res.redirect('/');
         }
@@ -97,8 +103,32 @@ module.exports = function (app, passport) {
                 return res.redirect(303, '/ingame');
             }
         );
+        
+        //updates the number of stations a user has================
+        user.update(
+            { uID: req.user._id },
+            {
+                stationcount: 1
+            },
+            { upsert: true },
+            function (err) {
+                if (err) {
+                    console.error(err.stack);
+                    req.session.flash = {
+                        type: 'danger',
+                        intro: 'Ooops!',
+                        message: 'There was an error proccesing your request.',
+                    };
+                    return res.redirect(303, '/stationcreate');
+                }
+                console.log("insert complete station count")
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Thank you!',
+                    message: 'You will be notified when this vacation is in season.',
+                };
+            });
     });
-    
     
     // =====================================
     // Profile ==============================

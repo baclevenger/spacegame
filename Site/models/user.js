@@ -10,6 +10,7 @@ var usersSchema = mongoose.Schema({
 	playername: String,
     stationid: Number,
     maxstations: Number,
+    stationcount: Number,
 	local            : {
 	    email        : String,
 	    password     : String,
