@@ -42,14 +42,14 @@ module.exports = function (app, passport) {
     // show the stationcreate form
     app.get('/stationcreate', isLoggedIn, function (req, res) {
         var Station = require('./models/Station.js');
-        var maxstations = { maxstations: req.user.maxstations };
-        var stationcount = { stationcount: req.user.stationcount };
+        var maxstations = req.user.maxstations;
+        var stationcount = req.user.stationcount;
         //console test for station count
-        console.log(stationcount);
+        console.log("station count =",stationcount);
+        console.log("max stations =", maxstations);
 
         //start if 
-        if (maxstations <= stationcount) {
-            
+        if (maxstations > stationcount) {
             res.render('stationcreate', {
                 bclass: "station",
                 user: req.user // get the user out of session and pass to template
@@ -106,9 +106,9 @@ module.exports = function (app, passport) {
         
         //updates the number of stations a user has================
         user.update(
-            { uID: req.user._id },
+            { _id: req.user._id },
             {
-                stationcount: 1
+                stationcount: req.user.stationcount +1
             },
             { upsert: true },
             function (err) {
