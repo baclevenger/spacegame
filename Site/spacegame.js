@@ -73,7 +73,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "Solar Panel",
         description: "basic production unit of energy",
-        graphic: "/images/images.jpg",
+        graphic: "/images/instsmall/Dock1.jpg",
         cost: {
             currency: 16,
             energy: 5,
@@ -99,7 +99,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "Hydroxification center",
         description: "advanced production unit of water",
-        graphic: "/images/images.jpg",
+        graphic: "/images/instsmall/images.jpg",
         cost: {
             currency: 1600,
             energy: 500,
@@ -125,7 +125,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "osmosis chamber",
         description: "moderate production unit of water",
-        graphic: "/images/images.jpg",
+        graphic: "/images/instsmall/lock1.jpg",
         cost: {
             currency: 160,
             energy: 50,
@@ -151,7 +151,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "mining hub",
         description: "basic production unit of minerals",
-        graphic: "/images/images.jpg",
+        graphic: "/images/instsmall/hall3.jpg",
         cost: {
             currency: 160,
             energy: 50,
@@ -177,7 +177,7 @@ installation.find(function (err, installations) {
     new installation({
         name: "hydro plant",
         description: "basic production unit of water",
-        graphic: "/images/images.jpg",
+        graphic: "/images/instsmall/o2reclaim.jpg",
         cost: {
             currency: 16,
             energy: 5,

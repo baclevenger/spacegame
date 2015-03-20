@@ -152,6 +152,7 @@ module.exports = function (app, passport) {
             X: station.location.X,
            Y: station.location.Y, 
            Z: station.location.Z,
+           test: req.user
         }
        res.render('profile', context);
     });
@@ -160,11 +161,11 @@ module.exports = function (app, passport) {
 
     // process the profile form
     
-    app.post('/profile', passport.authenticate('local-signup', {
-        successRedirect: '/profile', // redirect to the secure profile section
-        failureRedirect: '/ ', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));
+    //app.post('/profile', passport.authenticate('local-signup', {
+    //    successRedirect: '/profile', // redirect to the secure profile section
+    //    failureRedirect: '/ ', // redirect back to the signup page if there is an error
+    //    failureFlash: true // allow flash messages
+    //}));
     
     // =====================================
     // LOGOUT ==============================
@@ -186,6 +187,7 @@ module.exports = function (app, passport) {
         Station.findOne({ uID: req.user._id }, function (err, station) {
          //   console.log(station.levels);
             var context = {
+                sid: station._id,
                 bclass:station.race,
                 stationname: station.name, 
                 race: station.race,
@@ -211,42 +213,48 @@ module.exports = function (app, passport) {
     // install  ==============================
     // =====================================
     
+    //app.post('/install', passport.authenticate('local-signup', {
+    //    successRedirect: '/install', // redirect to the secure profile section
+    //    failureRedirect: '/ ', // redirect back to the signup page if there is an error
+    //    failureFlash: true // allow flash messages
+    //}));
+    
+      
     var Station = require('./models/Station.js');
     var Installation = require('./models/installation.js');
-    app.get('/install', isLoggedIn, function (req, res) {
+    app.post('/install', isLoggedIn, function (req, res) {
         Installation.find({}, function (err, installations){
             var context = {
+                sid: req.body.sid,
                 installations: installations.map(function (installation) {
                     return {
+                        _id: installation._id,
                         name: installation.name,
                         description: installation.description,
                         graphic: installation.graphic,
-                        currency: installation.currency,
-                        energy: installation.energy,
-                        oxygen: installation.oxygen,
-                        water: installation.water,
-                        food: installation.food,
-                        minerals: installation.minerals,
-                        darkMatter: installation.darkMatter
+                        currency: installation.cost.currency,
+                        energy: installation.cost.energy,
+                        oxygen: installation.cost.oxygen,
+                        water: installation.cost.water,
+                        food: installation.cost.food,
+                        minerals: installation.cost.minerals,
+                        darkMatter: installation.cost.darkMatter,
+                        dcurrency: installation.delta.currency,
+                        denergy: installation.delta.energy,
+                        doxygen: installation.delta.oxygen,
+                        dwater: installation.delta.water,
+                        dfood: installation.delta.food,
+                        dminerals: installation.delta.minerals,
+                        ddarkMatter: installation.delta.darkMatter
                         
-
-                        //delta: {
-                        //    currency: Number,
-                        //    energy: Number,
-                        //    oxygen: Number,
-                        //    water: Number,
-                        //    food: Number,
-                        //    minerals: Number,
-                        //    darkMatter: Number
-                        //}
 
                     }
                 })
             };
             res.render('install', context);
         });
-              
-        
+  
+
         //Station.findOne({ uID: req.user._id }, function (err, station) {
         //    //   console.log(station.levels);
         //    var context = {
@@ -269,7 +277,9 @@ module.exports = function (app, passport) {
         //});
     });
           
+
     
+        
 
     //custom 404 page
     app.use(function (req, res) {
