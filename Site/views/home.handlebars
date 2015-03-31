@@ -3,19 +3,40 @@
 		<h1>Infinite Space</h1>
 	</div>
 
+<script type="text/javascript">
+       
+    function vForm() {
+           
+            var y = document.forms["myForm"]["password"].value;
+            var z = document.forms["myForm"]["email"].value;
+
+            if (z == '' || z.indexOf('@') == -1 || z.indexOf('.') == -1) {
+                alert("please use valid email");
+                return false;
+            }else if{ (y == null || y == "") {
+                alert("password must be filled out");
+                return false;
+           
+            } else {
+                return true;
+            }
+    }
+
+</script>
+
 	<p1>
     {{#if error}}
         <div class="center">{{error}}</div>
     {{/if}}
-	<form method="post" action="/">
+	<form name="myForm" onsubmit="return vForm()" method="post" action="/">
+      
+        <label for="Email"></label>
+        <input type="text" id="email" name="email" placeholder="Enter Email" /><br />
 
-    <label for="Name">Email:</label>
-    <input type="text" id="email" name="email" /><br />
-	
-    <label for="Password">Password:</label>
-    <input type="password" id="password" name="password" /><br />
-	
-	<input type="submit" name="submit" value="Log In" />
+        <label for="Password"></label>
+        <input type="password" id="Password" name="password" placeholder="Enter Password" /><br />
+
+        <button type="submit" value="Submit">Submit</button>
     </form>
 	</p1>
 

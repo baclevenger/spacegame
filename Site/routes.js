@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
     app.post('/', passport.authenticate('local-login', {
         successRedirect: '/ingame', // redirect to the secure profile section
         failureRedirect: '/', // redirect back to the signup page if there is an error
-        failureFlash: false // allow flash messages
+        failureFlash: true // allow flash messages
     }));
     
     // =====================================
@@ -30,7 +30,7 @@ module.exports = function (app, passport) {
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect: '/stationcreate', // redirect to the secure profile section
         failureRedirect: '/register', // redirect back to the signup page if there is an error
-        failureFlash: false // allow flash messages
+        failureFlash: true // allow flash messages
     }));
     
     // =====================================
@@ -67,7 +67,7 @@ module.exports = function (app, passport) {
                 }, 
                 levels: 1,
             },
-            { upsert: false },
+            { upsert: true },
             function (err) {
                 if (err) {
                     console.error(err.stack);
@@ -104,7 +104,7 @@ module.exports = function (app, passport) {
     app.post('/profile', passport.authenticate('local-signup', {
         successRedirect: '/profile', // redirect to the secure profile section
         failureRedirect: '/ ', // redirect back to the signup page if there is an error
-        failureFlash: false // allow flash messages
+        failureFlash: true // allow flash messages
     }));
     
     // =====================================
