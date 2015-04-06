@@ -1,35 +1,58 @@
 <head>
 <link rel="stylesheet" type="text/css" href="SpaceGame.css">
-
+</head>
 	<div id= "1" class="center">
 		<title>Infinite Space</title>
 		<h1>Register</h1>
+        <p id="errorMes"></p>    
 	</div>
-</head>
+    <script type="text/javascript">
+        function validateForm() {
+            var x = document.forms["myForm"]["PlayerName"].value;
+            var y = document.forms["myForm"]["Password"].value;
+            var z = document.forms["myForm"]["Email"].value;
+            if (x == null || x == "") {
+                document.getElementById('errorMes').innerHTML = 'Name must be filled out';
+                //alert("Name must be filled out");
+                return false;
+            } else if (y == null || y == "") {
+                document.getElementById('errorMes').innerHTML = 'password must be filled out';
+               // alert("password must be filled out");
+                return false;
+            } else if (z == '' || z.indexOf('@') == -1 || z.indexOf('.') == -1) {
+                document.getElementById('errorMes').innerHTML = 'please use valid email';
+                //  alert("please use valid email");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
     {{#if error}}
     <div class="center">{{error}}</div>
     {{/if}}
 	<p1>
-	<form method="post" action="/register">
-	
-    <label for="PlayerName">Player Name:</label>
-    <input type="text" id="PlayerName" name="PlayerName" /><br />
+        <form name="myForm" method="post" onsubmit="return validateForm()" action="/register">
+            
+            <label for="PlayerName"></label>
+            <input type="text" id="PlayerName" name="PlayerEame" placeholder="Enter A Player Name" /><br />
 
-    <label for="Email">Email:</label>
-    <input type="text" id="Email" name="Email" /><br />
+            <label for="Email"></label>
+            <input type="text" id="Email" name="Email" placeholder="Enter Email" /><br />
 
-    <label for="Password">Password:</label>
-    <input type="password" id="Password" name="Password" /><br />
-        	
-	<button type="submit">Register</button> 
-    </form>
+            <label for="Password"></label>
+            <input type="password" id="Password" name="Password" placeholder="Enter Password" /><br />
+           
+            <button type="submit" value="Submit">Submit</button>
+        </form>  
 	</p1>
 
 
-<div id= "1" class="center">
+<!--<div id= "1" class="center">
 	<p2>
 	<FORM action="/"><INPUT type=submit value="LogIn"><a href="/" ></a>
 	</FORM>
 	</p2>
-	
+
   </div>
+    -->

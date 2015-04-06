@@ -21,6 +21,7 @@ module.exports = function (app, passport) {
     // =====================================
     // show the register form
     app.get('/register', function (req, res) {
+        
         res.render('register', { error: req.flash('error'), bclass: "register" });
     });
     

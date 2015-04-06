@@ -149,3 +149,10 @@ body.Entomoids { background: url("entomoids.jpg") no-repeat center center fixed;
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;}
+
+#errorMes {
+    color: red;
+    text-shadow: none;
+    font-size: 20px;
+    background-color: rgba(255,0,0,0.5);
+}
