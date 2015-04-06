@@ -4,6 +4,7 @@
 	<div id= "1" class="center">
 		<title>Infinite Space</title>
 		<h1>Register</h1>
+        <p id="errorMes"></p>    
 	</div>
     <script type="text/javascript">
         function validateForm() {
@@ -11,13 +12,16 @@
             var y = document.forms["myForm"]["Password"].value;
             var z = document.forms["myForm"]["Email"].value;
             if (x == null || x == "") {
-                alert("Name must be filled out");
+                document.getElementById('errorMes').innerHTML = 'Name must be filled out';
+                //alert("Name must be filled out");
                 return false;
             } else if (y == null || y == "") {
-                alert("password must be filled out");
+                document.getElementById('errorMes').innerHTML = 'password must be filled out';
+               // alert("password must be filled out");
                 return false;
             } else if (z == '' || z.indexOf('@') == -1 || z.indexOf('.') == -1) {
-                alert("please use valid email");
+                document.getElementById('errorMes').innerHTML = 'please use valid email';
+                //  alert("please use valid email");
                 return false;
             } else {
                 return true;

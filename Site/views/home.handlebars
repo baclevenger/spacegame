@@ -1,6 +1,7 @@
 	<div id= "1" class="center">
 		<title>Unlimited Space</title>
 		<h1>Infinite Space</h1>
+        <p id="errorMes"></p> 
 	</div>
 
 <script type="text/javascript">
@@ -11,10 +12,12 @@
             var z = document.forms["myForm"]["email"].value;
 
             if (z == '' || z.indexOf('@') == -1 || z.indexOf('.') == -1) {
-                alert("please use valid email");
+                // alert("please use valid email");
+                document.getElementById('errorMes').innerHTML = 'please use valid email';
                 return false;
-            }else if{ (y == null || y == "") {
-                alert("password must be filled out");
+            }else if (y == null || y == "") {
+                // alert("password must be filled out");
+                document.getElementById('errorMes').innerHTML = 'password must be filled out';
                 return false;
            
             } else {
@@ -43,7 +46,7 @@
 
 <div id= "1" class="center">
 	<p2>
-	<FORM action="register"><INPUT type=submit value="Register"><a href="register" ></a>
+	<FORM name="fReg" action="register"><INPUT type=submit value="Register"><a href="register" ></a>
 	</FORM>
 	</p2>
 	
