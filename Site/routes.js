@@ -210,6 +210,40 @@ module.exports = function (app, passport) {
     
     
     // =====================================
+    // admin  ==============================
+    // =====================================
+     
+    var Station = require('./models/Station.js');
+    var user = require('./models/user.js');
+    app.get('/admin', isLoggedIn, function (req, res) {
+        
+        user.findOne({ uID: req.user._id }, function (err, station) {
+
+            var context = {
+                admin: user.admin
+            }
+            
+            //never does else, but the admin variable works..not sure why yet
+
+            var admin = req.user.admin;
+            if (admin == true) {
+                res.render('admin', context);
+            }
+            else {
+                //logout
+                req.logout();
+                res.redirect('/');
+            }
+
+        });
+    });
+    
+    
+    
+
+    
+    
+    // =====================================
     // install  ==============================
     // =====================================
     
