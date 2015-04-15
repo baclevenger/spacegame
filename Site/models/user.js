@@ -11,6 +11,7 @@ var usersSchema = mongoose.Schema({
     stationid: Number,
     maxstations: Number,
     stationcount: Number,
+    admin: Boolean,
 	local            : {
 	    email        : String,
 	    password     : String,

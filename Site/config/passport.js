@@ -67,6 +67,9 @@ module.exports = function (passport) {
                     newUser.local.password = newUser.generateHash(Password);
                     newUser.maxstations = 1;
                     newUser.stationcount = 0;
+                    
+                    //admin
+                    newUser.admin = false;
 
                     // save the user
                     newUser.save(function (err) {
