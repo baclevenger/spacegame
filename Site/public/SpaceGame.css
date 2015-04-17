@@ -62,11 +62,12 @@ input[type=radio] {
 
 
 li.resources{
+margin:5px;
 display: inline; 
-font-size: 12px;
-color: white;
+font-size: 16px;
+color: black;
 font-family: ‘Arial Narrow’, sans-serif;
-border: 2px solid white;
+//border: 2px solid white;
 }
 
 ul{
@@ -268,4 +269,14 @@ width:350px;
   -o-background-size: cover;
   background-size: cover;
   background:rgba(0,0,0,0.5);
+}
+
+#Resour{
+    background-color: #BCC6CC; 
+    
+}
+
+#logoutBtn{
+
+
 }
