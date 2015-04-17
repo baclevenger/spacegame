@@ -222,9 +222,7 @@ module.exports = function (app, passport) {
             var context = {
                 admin: user.admin
             }
-            
-            //never does else, but the admin variable works..not sure why yet
-
+         
             var admin = req.user.admin;
             if (admin == true) {
                 res.render('admin', context);
@@ -255,9 +253,9 @@ module.exports = function (app, passport) {
     
       
     var Station = require('./models/Station.js');
-    var Installation = require('./models/installation.js');
+    var installation = require('./models/installation.js');
     app.post('/install', isLoggedIn, function (req, res) {
-        Installation.find({}, function (err, installations){
+        installation.find({}, function (err, installations){
             var context = {
                 sid: req.body.sid,
                 installations: installations.map(function (installation) {
@@ -287,31 +285,73 @@ module.exports = function (app, passport) {
             };
             res.render('install', context);
         });
-  
-
-        //Station.findOne({ uID: req.user._id }, function (err, station) {
-        //    //   console.log(station.levels);
-        //    var context = {
-        //        bclass: station.race,
-        //        stationname: station.name, 
-        //        race: station.race,
-        //        darkMatter: station.resources.darkMatter,
-        //        minerals: station.resources.minerals,
-        //        food: station.resources.food,
-        //        water: station.resources.water,
-        //        oxygen: station.resources.oxygen,
-        //        energy: station.resources.energy,
-        //        currency: station.resources.currency,
-        //        levels: station.levels,
-        //        X: station.location.X,
-        //        Y: station.location.Y, 
-        //        Z: station.location.Z,
-        //    }
-        //    res.render('ingame', context);
-        //});
+        
+    
     });
           
-
+    //process the install page ** not working yet
+    app.post('/install1', isLoggedIn, function (req, res) {
+        //var installation1 = req.body._id
+        installation.findOne({ _id: req.body._id }, {
+            _id: installation._id,
+            name: installation.name,
+            description: installation.description,
+            graphic: installation.graphic,
+            currency: "installation.cost.currency",
+            energy: "installation.cost.energy",
+            oxygen: "installation.cost.oxygen",
+            water: "installation.cost.water",
+            food: "installation.cost.food",
+            minerals: "installation.cost.minerals",
+            darkMatter: "installation.cost.darkMatter",
+            dcurrency: "installation.delta.currency",
+            denergy: "installation.delta.energy",
+            doxygen: "installation.delta.oxygen",
+            dwater: "installation.delta.water",
+            dfood: "installation.delta.food",
+            dminerals: "installation.delta.minerals",
+            ddarkMatter: "installation.delta.darkMatter"
+        })
+        
+        
+        Station.update(
+            {_id: req.body.sid }, {
+                $inc: { "rescources.currency":999
+                    //resources: {
+                    //    currency: 1000,
+                    //    energy: 1000,
+                    //    oxygen: 1000,
+                    //    water: 1000,
+                    //    food: 1000,
+                    //    minerals: 1000,
+                    //    darkMatter: 20
+                    //}
+                }
+                    
+                   // the installation they select
+            },
+            
+            { upsert: true },
+            function (err) {
+                if (err) {
+                    console.error(err.stack);
+                    req.session.flash = {
+                        type: 'danger',
+                        intro: 'Ooops!',
+                        message: 'There was an error proccesing your request.',
+                    };
+                    return res.redirect(303, '/install');
+                }
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Thank you!',
+                    message: 'You will be notified when this vacation is in season.',
+                };
+                return res.redirect(303, '/ingame');
+                
+            }
+        );
+    });
     
         
 
@@ -329,8 +369,6 @@ module.exports = function (app, passport) {
         res.status(500);
         res.send('500 - Server Error');
     });
-    
-    //use to be a '}' here, taking it out seemed to help
 }
     
     // route middleware to make sure a user is logged in
