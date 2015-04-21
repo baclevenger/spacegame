@@ -314,44 +314,54 @@ module.exports = function (app, passport) {
             ddarkMatter: "installation.delta.darkMatter"
         })
         
-        
-        Station.update(
-            {_id: 'ObjectId("' + req.body.sid +'")' }, {
-                $inc: { "rescources.currency":999
-                    //resources: {
-                    //    currency: 1000,
-                    //    energy: 1000,
-                    //    oxygen: 1000,
-                    //    water: 1000,
-                    //    food: 1000,
-                    //    minerals: 1000,
-                    //    darkMatter: 20
-                    //}
-                }
-                    
-                   // the installation they select
-            },
+        Station.findById(req.body.sid, function (err, station) {
+            if (err) return handleError(err);
             
-            { upsert: true },
-            function (err) {
-                if (err) {
-                    console.error(err.stack);
-                    req.session.flash = {
-                        type: 'danger',
-                        intro: 'Ooops!',
-                        message: 'There was an error proccesing your request.',
-                    };
-                    return res.redirect(303, '/install');
-                }
-                req.session.flash = {
-                    type: 'success',
-                    intro: 'Thank you!',
-                    message: 'You will be notified when this vacation is in season.',
-                };
-                return res.redirect(303, '/ingame');
+            station.resources.currency = station.resources.currency + 999;
+            
+            station.save(function (err) {
+                if (err) { console.error(err.stack); }                ;
+                res.redirect('/ingame');
+            });
+        });
+
+        //Station.update(
+        //    {_id: 'ObjectId("' + req.body.sid +'")' }, {
+        //        $inc: { "rescources.currency":999
+        //            //resources: {
+        //            //    currency: 1000,
+        //            //    energy: 1000,
+        //            //    oxygen: 1000,
+        //            //    water: 1000,
+        //            //    food: 1000,
+        //            //    minerals: 1000,
+        //            //    darkMatter: 20
+        //            //}
+        //        }
+                    
+        //           // the installation they select
+        //    },
+            
+        //    { upsert: true },
+        //    function (err) {
+        //        if (err) {
+        //            console.error(err.stack);
+        //            req.session.flash = {
+        //                type: 'danger',
+        //                intro: 'Ooops!',
+        //                message: 'There was an error proccesing your request.',
+        //            };
+        //            return res.redirect(303, '/install');
+        //        }
+        //        req.session.flash = {
+        //            type: 'success',
+        //            intro: 'Thank you!',
+        //            message: 'You will be notified when this vacation is in season.',
+        //        };
+        //        return res.redirect(303, '/ingame');
                 
-            }
-        );
+        //    }
+        //);
     });
     
         
