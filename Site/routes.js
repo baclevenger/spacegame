@@ -316,7 +316,7 @@ module.exports = function (app, passport) {
         
         
         Station.update(
-            {_id: req.body.sid }, {
+            {_id: 'ObjectId("' + req.body.sid +'")' }, {
                 $inc: { "rescources.currency":999
                     //resources: {
                     //    currency: 1000,
