@@ -3,22 +3,27 @@
     <title>Infinite Space</title>
     <h1>Profile</h1>
 </div>
-</head>
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
 <p1>
     <!-- LOCAL INFORMATION -->
-    <div class="center">PlayerName:{{user}}</div>
-    
+    <ul>
+        <li class="center">Station Name:{{stationname}}</li>
+        <li class="center">DarkMatter:{{darkMatter}}</li>
+        <li class="center">Station Levels:{{levels}}</li>
+        <li class="center">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
+       <!--<li class="center">session object:{{test}}</li>--> 
+    </ul>
 </p1>
 
 
 <div id="1" class="center">
     <p2>
-            <form action="/">
-                <input type=submit value="SignOut"><a href="/"></a>
-            </form>
+        <a href="/ingame">
+            <button type="submit" class="btn btn-default">Back</button>
+        </a>
+
     </p2>
 
 </div>

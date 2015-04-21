@@ -1,0 +1,21 @@
+
+<h1> Installations</h1> 
+<h2>available for Station: {{sid}}</h2>
+	<p1>
+    {{#if error}}
+        <div class="center">{{error}}</div>
+    {{/if}}
+{{#each installations}}
+    <h3>{{name}}</h3>
+    <h3>{{description}}</h3>
+        <form name="build" action="/install1" method="post">
+            <input type="hidden" name="_id" id="sid" value={{_id}}>
+            <button type="submit" class="btn btn-default">Build</button>
+        </form>
+    <img src ="{{{graphic}}}">
+    
+{{/each}}
+</p1>
+
+
+
