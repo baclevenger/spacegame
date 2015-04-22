@@ -275,9 +275,10 @@ module.exports = function (app, passport) {
     app.post('/install', isLoggedIn, function (req, res) {
         installation.find({}, function (err, installations){
             var context = {
-                sid: req.body.sid,
+                
                 installations: installations.map(function (installation) {
                     return {
+                        sid: req.body.sid,
                         _id: installation._id,
                         name: installation.name,
                         description: installation.description,
