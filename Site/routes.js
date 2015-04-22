@@ -83,6 +83,15 @@ module.exports = function (app, passport) {
                     minerals: 1000,
                     darkMatter: 20
                 }, 
+                delta: {
+                    currency: 0,
+                    energy: 0,
+                    oxygen: 0,
+                    water: 0,
+                    food: 0,
+                    minerals: 0,
+                    darkMatter: 0
+                },
                 levels: 1,
             },
             { upsert: true },
@@ -199,6 +208,14 @@ module.exports = function (app, passport) {
                 oxygen: station.resources.oxygen,
                 energy: station.resources.energy,
                 currency: station.resources.currency,
+                ddarkMatter: station.delta.darkMatter,
+                dminerals: station.delta.minerals,
+                dfood: station.delta.food,
+                dwater: station.delta.water,
+                doxygen: station.delta.oxygen,
+                denergy: station.delta.energy,
+                dcurrency: station.delta.currency,
+
                 levels: station.levels,
                 X: station.location.X,
                 Y: station.location.Y, 
@@ -293,35 +310,51 @@ module.exports = function (app, passport) {
     //process the install page ** not working yet
     app.post('/install1', isLoggedIn, function (req, res) {
         //var installation1 = req.body._id
-        installation.findOne({ _id: req.body._id }, {
-            _id: installation._id,
-            name: installation.name,
-            description: installation.description,
-            graphic: installation.graphic,
-            currency: "installation.cost.currency",
-            energy: "installation.cost.energy",
-            oxygen: "installation.cost.oxygen",
-            water: "installation.cost.water",
-            food: "installation.cost.food",
-            minerals: "installation.cost.minerals",
-            darkMatter: "installation.cost.darkMatter",
-            dcurrency: "installation.delta.currency",
-            denergy: "installation.delta.energy",
-            doxygen: "installation.delta.oxygen",
-            dwater: "installation.delta.water",
-            dfood: "installation.delta.food",
-            dminerals: "installation.delta.minerals",
-            ddarkMatter: "installation.delta.darkMatter"
-        })
         
-        Station.findById(req.body.sid, function (err, station) {
+        
+
+        installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
             
-            station.resources.currency = station.resources.currency + 999;
-            
-            station.save(function (err) {
-                if (err) { console.error(err.stack); }                ;
-                res.redirect('/ingame');
+            Station.findById(req.body.sid, function (err, station) {
+                if (err) return handleError(err);
+                
+                
+                if (station.resources.currency >= install.cost.currency && 
+                    station.resources.energy >= install.cost.energy && 
+                    station.resources.oxygen >= install.cost.oxygen &&
+                    station.resources.water >= install.cost.water &&
+                    station.resources.food >= install.cost.food &&
+                    station.resources.minerals >= install.cost.minerals &&
+                    station.resources.darkMatter >= install.cost.darkMatter) {
+
+                    station.resources.currency = station.resources.currency - install.cost.currency;
+                    station.resources.energy = station.resources.energy - install.cost.energy;
+                    station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
+                    station.resources.water = station.resources.water - install.cost.water;
+                    station.resources.food = station.resources.food - install.cost.food;
+                    station.resources.minerals = station.resources.minerals - install.cost.minerals;
+                    station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
+                    
+                    station.delta.currency = station.delta.currency + install.delta.currency;
+                    station.delta.energy = station.delta.energy + install.delta.energy;
+                    station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
+                    station.delta.water = station.delta.water + install.delta.water;
+                    station.delta.food = station.delta.food + install.delta.food;
+                    station.delta.minerals = station.delta.minerals + install.delta.minerals;
+                    station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
+                    
+                    station.save(function (err) {
+                        if (err) { console.error(err.stack); }
+                        res.redirect('/ingame');
+                    
+                    });
+                }
+
+                else {
+                    //cost message
+                    res.redirect('/ingame')
+                }
             });
         });
 
