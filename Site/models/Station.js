@@ -15,22 +15,25 @@ var stationSchema = mongoose.Schema({
         0: {
 
         },   
-        1: [{
+        one: [{
             type: Schema.Types.ObjectId,
             ref: 'installation'
         }],
 
-        2: [{
+        two: [{
             type: Schema.Types.ObjectId,
             ref: 'installation'
         }],
 
-        3: [{
+        three: [{
             type: Schema.Types.ObjectId,
             ref: 'installation'
         }],
               
     },
+
+    ringWidth: Number,
+
     resources: {
         currency: Number,
         energy: Number,
