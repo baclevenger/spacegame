@@ -65,8 +65,6 @@ module.exports = function (app, passport) {
     });
     
     // process the stationcreate form
-    
-    
     app.post('/stationcreate', isLoggedIn, function (req, res) {
         Station.update(
             { uID: req.user._id },
@@ -92,6 +90,7 @@ module.exports = function (app, passport) {
                     minerals: 0,
                     darkMatter: 0
                 },
+                ringWidth: 1,
                 levels: 1,
             },
             { upsert: true },
@@ -145,12 +144,6 @@ module.exports = function (app, passport) {
     // =====================================
     // show the Profile form
     app.get('/profile', isLoggedIn, function (req, res) {
-      //  res.render('profile', {
-        //    user: req.user, // get the user out of session and pass to template
-          //  bclass: "profile"
-       // });
-    
-    
     
     Station.findOne({ uID: req.user._id }, function (err, station) {
         var context = {
@@ -168,15 +161,6 @@ module.exports = function (app, passport) {
     });
         
     });
-
-    // process the profile form
-    
-    //app.post('/profile', passport.authenticate('local-signup', {
-    //    successRedirect: '/profile', // redirect to the secure profile section
-    //    failureRedirect: '/ ', // redirect back to the signup page if there is an error
-    //    failureFlash: true // allow flash messages
-    //}));
-    
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -184,7 +168,29 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
+    // =====================================
+    // admin  ==============================
+    // =====================================
     
+    var Station = require('./models/Station.js');
+    var user = require('./models/user.js');
+    app.get('/admin', isLoggedIn, function (req, res) {
+        user.findOne({ uID: req.user._id }, function (err, station) {
+            var context = {
+                admin: user.admin
+            }
+            var admin = req.user.admin;
+            if (admin == true) {
+                res.render('admin', context);
+            }
+            else {
+                //logout
+                req.logout();
+                res.redirect('/');
+            }
+
+        });
+    });
     
     // =====================================
     // ingame  ==============================
@@ -224,87 +230,59 @@ module.exports = function (app, passport) {
             res.render('ingame', context);
             });
         });
-    
-    
-    
-    // =====================================
-    // admin  ==============================
-    // =====================================
-     
-    var Station = require('./models/Station.js');
-    var user = require('./models/user.js');
-    app.get('/admin', isLoggedIn, function (req, res) {
-        
-        user.findOne({ uID: req.user._id }, function (err, station) {
-
-            var context = {
-                admin: user.admin
-            }
-         
-            var admin = req.user.admin;
-            if (admin == true) {
-                res.render('admin', context);
-            }
-            else {
-                //logout
-                req.logout();
-                res.redirect('/');
-            }
-
-        });
-    });
-    
-    
-    
-
-    
-    
+       
     // =====================================
     // install  ==============================
     // =====================================
     
-    //app.post('/install', passport.authenticate('local-signup', {
-    //    successRedirect: '/install', // redirect to the secure profile section
-    //    failureRedirect: '/ ', // redirect back to the signup page if there is an error
-    //    failureFlash: true // allow flash messages
-    //}));
-    
-      
     var Station = require('./models/Station.js');
     var installation = require('./models/installation.js');
     app.post('/install', isLoggedIn, function (req, res) {
-        installation.find({}, function (err, installations){
-            var context = {
-                
-                installations: installations.map(function (installation) {
-                    return {
-                        sid: req.body.sid,
-                        _id: installation._id,
-                        name: installation.name,
-                        description: installation.description,
-                        graphic: installation.graphic,
-                        currency: installation.cost.currency,
-                        energy: installation.cost.energy,
-                        oxygen: installation.cost.oxygen,
-                        water: installation.cost.water,
-                        food: installation.cost.food,
-                        minerals: installation.cost.minerals,
-                        darkMatter: installation.cost.darkMatter,
-                        dcurrency: installation.delta.currency,
-                        denergy: installation.delta.energy,
-                        doxygen: installation.delta.oxygen,
-                        dwater: installation.delta.water,
-                        dfood: installation.delta.food,
-                        dminerals: installation.delta.minerals,
-                        ddarkMatter: installation.delta.darkMatter
-                        
-
-                    }
-                })
-            };
-            res.render('install', context);
-        });
         
+        Station.findById(req.body.sid, function (err, station) {
+            if (err) { console.error(err.stack); }
+            
+            //only displays installations they can afford
+            
+            installation.find({
+               "cost.currency": { $lte: station.resources.currency},
+               "cost.energy": { $lte: station.resources.energy},
+               "cost.oxygen": { $lte: station.resources.oxygen},
+               "cost.water": { $lte: station.resources.water},
+               "cost.food": { $lte: station.resources.food },
+               "cost.minerals": { $lte: station.resources.minerals },
+               "cost.darkMatter": { $lte: station.resources.darkMatter }
+
+            }, function (err, installations) {
+                if (err) { console.error(err.stack); }
+                var context = {
+                    installations: installations.map(function (installation) {
+                        return {
+                            sid: req.body.sid,
+                            _id: installation._id,
+                            name: installation.name,
+                            description: installation.description,
+                            graphic: installation.graphic,
+                            currency: installation.cost.currency,
+                            energy: installation.cost.energy,
+                            oxygen: installation.cost.oxygen,
+                            water: installation.cost.water,
+                            food: installation.cost.food,
+                            minerals: installation.cost.minerals,
+                            darkMatter: installation.cost.darkMatter,
+                            dcurrency: installation.delta.currency,
+                            denergy: installation.delta.energy,
+                            doxygen: installation.delta.oxygen,
+                            dwater: installation.delta.water,
+                            dfood: installation.delta.food,
+                            dminerals: installation.delta.minerals,
+                            ddarkMatter: installation.delta.darkMatter
+                        }
+                    })
+                };
+                res.render('install', context);
+            });
+        })
     
     });
           
@@ -312,39 +290,36 @@ module.exports = function (app, passport) {
     app.post('/install1', isLoggedIn, function (req, res) {
         //var installation1 = req.body._id
         
-        
-
-        installation.findById(req.body._id, function (err, install) {
+         installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
             
             Station.findById(req.body.sid, function (err, station) {
                 if (err) return handleError(err);
                 
-                
-                if (station.resources.currency >= install.cost.currency && 
+                    if (station.resources.currency >= install.cost.currency && 
                     station.resources.energy >= install.cost.energy && 
                     station.resources.oxygen >= install.cost.oxygen &&
                     station.resources.water >= install.cost.water &&
                     station.resources.food >= install.cost.food &&
                     station.resources.minerals >= install.cost.minerals &&
                     station.resources.darkMatter >= install.cost.darkMatter) {
+                        
+                        station.resources.currency = station.resources.currency - install.cost.currency;
+                        station.resources.energy = station.resources.energy - install.cost.energy;
+                        station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
+                        station.resources.water = station.resources.water - install.cost.water;
+                        station.resources.food = station.resources.food - install.cost.food;
+                        station.resources.minerals = station.resources.minerals - install.cost.minerals;
+                        station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
+                        
+                        station.delta.currency = station.delta.currency + install.delta.currency;
+                        station.delta.energy = station.delta.energy + install.delta.energy;
+                        station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
+                        station.delta.water = station.delta.water + install.delta.water;
+                        station.delta.food = station.delta.food + install.delta.food;
+                        station.delta.minerals = station.delta.minerals + install.delta.minerals;
+                        station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
 
-                    station.resources.currency = station.resources.currency - install.cost.currency;
-                    station.resources.energy = station.resources.energy - install.cost.energy;
-                    station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
-                    station.resources.water = station.resources.water - install.cost.water;
-                    station.resources.food = station.resources.food - install.cost.food;
-                    station.resources.minerals = station.resources.minerals - install.cost.minerals;
-                    station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
-                    
-                    station.delta.currency = station.delta.currency + install.delta.currency;
-                    station.delta.energy = station.delta.energy + install.delta.energy;
-                    station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
-                    station.delta.water = station.delta.water + install.delta.water;
-                    station.delta.food = station.delta.food + install.delta.food;
-                    station.delta.minerals = station.delta.minerals + install.delta.minerals;
-                    station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
-                    
                     station.save(function (err) {
                         if (err) { console.error(err.stack); }
                         res.redirect('/ingame');
@@ -358,55 +333,13 @@ module.exports = function (app, passport) {
                 }
             });
         });
-
-        //Station.update(
-        //    {_id: 'ObjectId("' + req.body.sid +'")' }, {
-        //        $inc: { "rescources.currency":999
-        //            //resources: {
-        //            //    currency: 1000,
-        //            //    energy: 1000,
-        //            //    oxygen: 1000,
-        //            //    water: 1000,
-        //            //    food: 1000,
-        //            //    minerals: 1000,
-        //            //    darkMatter: 20
-        //            //}
-        //        }
-                    
-        //           // the installation they select
-        //    },
-            
-        //    { upsert: true },
-        //    function (err) {
-        //        if (err) {
-        //            console.error(err.stack);
-        //            req.session.flash = {
-        //                type: 'danger',
-        //                intro: 'Ooops!',
-        //                message: 'There was an error proccesing your request.',
-        //            };
-        //            return res.redirect(303, '/install');
-        //        }
-        //        req.session.flash = {
-        //            type: 'success',
-        //            intro: 'Thank you!',
-        //            message: 'You will be notified when this vacation is in season.',
-        //        };
-        //        return res.redirect(303, '/ingame');
-                
-        //    }
-        //);
     });
-    
-        
-
     //custom 404 page
     app.use(function (req, res) {
         res.type('text/plain');
         res.status(404);
         res.send('404 - Not Found');
     });
-    
     //custom 500 page
     app.use(function (err, req, res, next) {
         console.error(err.stack);
@@ -415,7 +348,6 @@ module.exports = function (app, passport) {
         res.send('500 - Server Error');
     });
 }
-    
     // route middleware to make sure a user is logged in
     function isLoggedIn(req, res, next) {
         
