@@ -302,7 +302,8 @@ module.exports = function (app, passport) {
                     station.resources.water >= install.cost.water &&
                     station.resources.food >= install.cost.food &&
                     station.resources.minerals >= install.cost.minerals &&
-                    station.resources.darkMatter >= install.cost.darkMatter) {
+                    station.resources.darkMatter >= install.cost.darkMatter &&
+                    station.level.one.length < 8) {
                         
                         station.resources.currency = station.resources.currency - install.cost.currency;
                         station.resources.energy = station.resources.energy - install.cost.energy;
@@ -319,6 +320,10 @@ module.exports = function (app, passport) {
                         station.delta.food = station.delta.food + install.delta.food;
                         station.delta.minerals = station.delta.minerals + install.delta.minerals;
                         station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
+
+                    //installations take up space in the station
+                    station.level.one[0] = install._id;
+                    console.log(station.level.one[0]);
 
                     station.save(function (err) {
                         if (err) { console.error(err.stack); }
