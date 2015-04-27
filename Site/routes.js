@@ -322,7 +322,7 @@ module.exports = function (app, passport) {
                         station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
 
                     //installations take up space in the station
-                    station.level.one[0] = install._id;
+                    station.level.one.push(install._id);
                     console.log(station.level.one[0]);
 
                     station.save(function (err) {
