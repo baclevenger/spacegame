@@ -2,7 +2,7 @@
     <!--<div id="1" class="center"></div>-->
     <title>Infinite Space</title>
 
-    <!-- LOCAL INFORMATION -->
+g    <!-- LOCAL INFORMATION -->
     
 
     <div id="Resour" >
@@ -20,30 +20,34 @@
             <a href="/profile">
                 <button type="submit" class="btn btn-default">Profile</button>
             </a>
-            
+            <form name="install" action="/install" method="post">
+                <input type="hidden" name="sid" id="sid" value={{sid}}>
+                <button type="submit" class="btn btn-default">Build</button>
+            </form>
         </ul>
         
     </div>
 
+<div style="text-align:center" id="stationPG" class="col-md-6">
 
+    <p>{{stationname}}</p>
 
-  <h1 class="center">
-    {{stationname}}
-        <br>
-      <form name="install" action="/install" method="post">
-          <input type="hidden" name="sid" id="sid" value={{sid}}>
-          <button type="submit" class="btn btn-default">Build</button>
-      </form>
-</h1>
+</div>
 
+<div style="text-align:center" id="contextual" class="col-md-6">
+    <p>Do Stuff</p>
+
+</div>
+
+ 
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
  
 
+<br/>
 
-
-<div id="1" class="center">
+<div id="1">
     <p2>
         <a href="/logout">
             <button  type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>

@@ -64,10 +64,10 @@ input[type=radio] {
 li.resources{
 margin:5px;
 display: inline; 
-font-size: 16px;
+font-size: 14px;
 color: black;
 font-family: ‘Arial Narrow’, sans-serif;
-//border: 2px solid white;
+
 }
 
 ul{
@@ -111,7 +111,7 @@ font-family: ‘Arial Narrow’, sans-serif;
        position: absolute;
        width: 800px; 
        margin: 0 auto; 
-       padding: 10px;  
+       padding: 5px;  
      }
     
     
@@ -273,10 +273,10 @@ width:350px;
 
 #Resour{
     background-color: #BCC6CC; 
-    
+
 }
 
 #logoutBtn{
-
+float: right;
 
 }
