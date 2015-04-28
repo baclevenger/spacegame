@@ -75,6 +75,8 @@ font-family: ‘Arial Narrow’, sans-serif;
 ul{
     list-style-type: none;
     color:white;
+    margin-left: 38%;
+    text-align:left;
 }
 
 p{
