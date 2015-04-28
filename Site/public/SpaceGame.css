@@ -284,12 +284,17 @@ float: right;
  background-color: rgba(255,255,255,0.5);
  border-style: solid;
  border-color: black;
- border-width: 3px;
-
+ border-width: 5px;
+ border-radius: 15px;
+ height:500px;
+ padding: 5px 5px 5px 5px;
 }
 #stationPG{
-    background-color: rgba(255,255,255,0.5);
-     border-style: solid;
+ background-color: rgba(255,255,255,0.5);
+ border-style: solid;
  border-color: black;
- border-width: 3px;
+ border-width: 5px;
+ border-radius: 15px;
+ height:500px;
+ padding: 5px 5px 5px 5px;
 }
