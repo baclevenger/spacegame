@@ -22,8 +22,6 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  var bodyParser = require('body-parser');
 var session = require('express-session');
 
-var Agenda = require('Agenda');
-
 //configuration==============================================
  var credentials = require('./config/credentials.js');
 
@@ -209,12 +207,11 @@ installation.find(function (err, installations) {
 
 require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-var agenda = new Agenda({ db: { address: 'localhost:27017/agenda' } });
 
-agenda.start();
 
 //Launch app
 app.listen(app.get('port'), function(){
 	console.log( 'Express started on http://localhost:' + 
 		app.get('port') + '; press Crtl-C to terminate.');
 });
+
