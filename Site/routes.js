@@ -168,43 +168,53 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
-    // =====================================
-    // admin  ==============================
-    // =====================================
-    
-    var Station = require('./models/Station.js');
-    var user = require('./models/user.js');
-    app.get('/admin', isLoggedIn, function (req, res) {
-        user.findOne({ uID: req.user._id }, function (err, station) {
-            var context = {
-                admin: user.admin
-            }
-            var admin = req.user.admin;
-            if (admin == true) {
-                res.render('admin', context);
-            }
-            else {
-                //logout
-                req.logout();
-                res.redirect('/');
-            }
-
-        });
-    });
-    
+     
     // =====================================
     // ingame  ==============================
     // =====================================
-    
-    //works 
     var Station = require('./models/Station.js');
+    var user = require('./models/user.js'); 
+    
     app.get('/ingame', isLoggedIn, function (req, res) {
+        
        
         Station.findOne({ uID: req.user._id }, function (err, station) {
-         //   console.log(station.levels);
+         //   console.log(station.levels)
+            
+            for (var i =0; i < station.level.one.length; i++) {
+                installation.findOne({ "_id": station.level.one[i] } , function (err, installations) {
+                    console.log(installations.name);
+                    console.log(station.level.one.length);
+                    console.log(station.level.one);
+                    //installations: installations.map(function (installation) {
+                    //        return {
+                    //            sid: req.body.sid,
+                    //            _id: installation._id,
+                    //            name: installation.name,
+                    //            description: installation.description,
+                    //            graphic: installation.graphic,
+                    //            currency: installation.cost.currency,
+                    //            energy: installation.cost.energy,
+                    //            oxygen: installation.cost.oxygen,
+                    //            water: installation.cost.water,
+                    //            food: installation.cost.food,
+                    //            minerals: installation.cost.minerals,
+                    //            darkMatter: installation.cost.darkMatter,
+                    //            dcurrency: installation.delta.currency,
+                    //            denergy: installation.delta.energy,
+                    //            doxygen: installation.delta.oxygen,
+                    //            dwater: installation.delta.water,
+                    //            dfood: installation.delta.food,
+                    //            dminerals: installation.delta.minerals,
+                    //            ddarkMatter: installation.delta.darkMatter
+                    //        }
+                    //    })
+                })
+                
+            }
             var context = {
                 sid: station._id,
-                bclass:station.race,
+                bclass: station.race,
                 stationname: station.name, 
                 race: station.race,
                 darkMatter: station.resources.darkMatter,
@@ -221,15 +231,24 @@ module.exports = function (app, passport) {
                 doxygen: station.delta.oxygen,
                 denergy: station.delta.energy,
                 dcurrency: station.delta.currency,
-
+                one: station.level.one,
                 levels: station.levels,
                 X: station.location.X,
                 Y: station.location.Y, 
                 Z: station.location.Z,
             }
-            res.render('ingame', context);
+                    var admin = req.user.admin;
+                    if (admin == true) {
+                        res.render('admin', context);
+                    }
+                    else {
+                        res.render('ingame', context);
+                    }
             });
-        });
+            });
+//});
+//        });
+    
        
     // =====================================
     // install  ==============================
@@ -286,9 +305,8 @@ module.exports = function (app, passport) {
     
     });
           
-    //process the install page ** not working yet
+    //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
-        //var installation1 = req.body._id
         
          installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
