@@ -31,7 +31,9 @@ background: url("charater.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
-
+.form{
+    color:black;
+}
 
 .center {
 text-align: center;
@@ -72,17 +74,20 @@ font-family: ‘Arial Narrow’, sans-serif;
 
 ul{
     list-style-type: none;
+    color:white;
+    margin-left: 38%;
+    text-align:left;
 }
 
 p{
 font-size: 15px;
-color: white;
 font-family: ‘Arial Narrow’, sans-serif;
 }
 
 
 p1{
-font-size: 20px;
+color: white;
+font-size: 35px;
 text-align: center;
 font-family: ‘Arial Narrow’, sans-serif;
 }
@@ -178,7 +183,6 @@ font-size:40px;
 color: white;
 font-family: ‘Arial Narrow’, sans-serif;
 list-style-type: none;
-text-align: center;
 }
 #two {
 background: none repeat scroll 0 0 #EEEEEE;
@@ -206,7 +210,7 @@ transition: all .3s ease;
 display:block;
 position:fixed;
 top: 25px;
-left:50px;
+left:10px;
 height:550px;
 width:350px;
 }
@@ -284,21 +288,12 @@ float: right;
  background-color: rgba(255,255,255,0.5);
  border-style: solid;
  border-color: black;
- border-width: 5px;
- border-radius: 15px;
- height:500px;
- padding: 5px 5px 5px 5px;
+ border-width: 3px;
+
 }
 #stationPG{
- background-color: rgba(255,255,255,0.5);
- border-style: solid;
+    background-color: rgba(255,255,255,0.5);
+     border-style: solid;
  border-color: black;
- border-width: 5px;
- border-radius: 15px;
- height:500px;
- padding: 5px 5px 5px 5px;
-}
-
-#sName{
-    font-size: 48px;    
+ border-width: 3px;
 }
