@@ -16,9 +16,34 @@ var stationSchema = mongoose.Schema({
 
         },   
         one: [{
-            type: Schema.Types.ObjectId,
-            ref: 'installation'
-        }],
+                name: String,
+                description: String,
+                graphic: String,
+                req: [{
+                        type: Schema.Types.ObjectId,
+                        ref: 'research'
+                    }],
+                cost: {
+                    currency: Number,
+                    energy: Number,
+                    oxygen: Number,
+                    water: Number,
+                    food: Number,
+                    minerals: Number,
+                    darkMatter: Number
+                },
+                delta: {
+                    currency: Number,
+                    energy: Number,
+                    oxygen: Number,
+                    water: Number,
+                    food: Number,
+                    minerals: Number,
+                    darkMatter: Number
+                }
+
+
+            }],
 
         two: [{
             type: Schema.Types.ObjectId,

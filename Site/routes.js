@@ -180,38 +180,6 @@ module.exports = function (app, passport) {
        
         Station.findOne({ uID: req.user._id }, function (err, station) {
          //   console.log(station.levels)
-            
-            for (var i =0; i < station.level.one.length; i++) {
-                installation.findOne({ "_id": station.level.one[i] } , function (err, installations) {
-                    console.log(installations.name);
-                    console.log(station.level.one.length);
-                    console.log(station.level.one);
-                    //installations: installations.map(function (installation) {
-                    //        return {
-                    //            sid: req.body.sid,
-                    //            _id: installation._id,
-                    //            name: installation.name,
-                    //            description: installation.description,
-                    //            graphic: installation.graphic,
-                    //            currency: installation.cost.currency,
-                    //            energy: installation.cost.energy,
-                    //            oxygen: installation.cost.oxygen,
-                    //            water: installation.cost.water,
-                    //            food: installation.cost.food,
-                    //            minerals: installation.cost.minerals,
-                    //            darkMatter: installation.cost.darkMatter,
-                    //            dcurrency: installation.delta.currency,
-                    //            denergy: installation.delta.energy,
-                    //            doxygen: installation.delta.oxygen,
-                    //            dwater: installation.delta.water,
-                    //            dfood: installation.delta.food,
-                    //            dminerals: installation.delta.minerals,
-                    //            ddarkMatter: installation.delta.darkMatter
-                    //        }
-                    //    })
-                })
-                
-            }
             var context = {
                 sid: station._id,
                 bclass: station.race,
@@ -235,8 +203,13 @@ module.exports = function (app, passport) {
                 levels: station.levels,
                 X: station.location.X,
                 Y: station.location.Y, 
-                Z: station.location.Z,
+                Z: station.location.Z,                        
+                installations: station.level.one
+
+
+                
             }
+
                     var admin = req.user.admin;
                     if (admin == true) {
                         res.render('admin', context);
@@ -340,7 +313,7 @@ module.exports = function (app, passport) {
                         station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
 
                     //installations take up space in the station
-                    station.level.one.push(install._id);
+                    station.level.one.push(install);
                     console.log(station.level.one[0]);
 
                     station.save(function (err) {
