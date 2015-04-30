@@ -49,10 +49,12 @@ var opts = {
      }
  };
  switch (app.get('env')) {
-     case 'development':
+    case 'development':
+        var agenda = new Agenda({ db: { address: credentials.mongo.development.connectionString } });
          mongoose.connect(credentials.mongo.development.connectionString, opts);
          break;
-     case 'production':
+    case 'production':
+        var agenda = new Agenda({ db: { address: credentials.mongo.production.connectionString } });
          mongoose.connect(credentials.mongo.production.connectionString, opts);
          break;
      default:
