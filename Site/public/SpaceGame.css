@@ -298,3 +298,7 @@ float: right;
  height:500px;
  padding: 5px 5px 5px 5px;
 }
+
+#sName{
+    font-size: 48px;    
+}
