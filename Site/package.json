@@ -14,13 +14,11 @@
     "express3-handlebars": "^0.5.2",
     "method-override": "^2.3.1",
     "mongo": "^0.1.0",
-    "mongoose": ">=3.8.23",
+    "mongoose": "^3.8.23",
     "morgan": "^1.5.1",
     "nodemon": "^1.3.6",
     "passport": "^0.2.1",
-    "passport-local": "^1.0.0",
-	"agenda":"^0.6.28",
-	"console-stamp":">=0.1.6"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.1.0"
