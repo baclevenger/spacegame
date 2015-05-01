@@ -21,6 +21,7 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  var cookieParser = require('cookie-parser');
  var bodyParser = require('body-parser');
 var session = require('express-session');
+var Agenda = require('Agenda');
 
 //configuration==============================================
  var credentials = require('./config/credentials.js');
