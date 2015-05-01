@@ -20,7 +20,8 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  var morgan = require('morgan');
  var cookieParser = require('cookie-parser');
  var bodyParser = require('body-parser');
- var session = require('express-session');
+var session = require('express-session');
+var Agenda = require('Agenda');
 
 //configuration==============================================
  var credentials = require('./config/credentials.js');
@@ -49,10 +50,12 @@ var opts = {
      }
  };
  switch (app.get('env')) {
-     case 'development':
+    case 'development':
+        var agenda = new Agenda({ db: { address: credentials.mongo.development.connectionString } });
          mongoose.connect(credentials.mongo.development.connectionString, opts);
          break;
-     case 'production':
+    case 'production':
+        var agenda = new Agenda({ db: { address: credentials.mongo.production.connectionString } });
          mongoose.connect(credentials.mongo.production.connectionString, opts);
          break;
      default:
@@ -208,8 +211,10 @@ installation.find(function (err, installations) {
 require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
+
 //Launch app
 app.listen(app.get('port'), function(){
 	console.log( 'Express started on http://localhost:' + 
 		app.get('port') + '; press Crtl-C to terminate.');
 });
+
