@@ -81,7 +81,6 @@ module.exports = function (app, passport) {
                     minerals: 1000,
                     darkMatter: 20
                 }, 
-<<<<<<< HEAD
                 delta: {
                     currency: 0,
                     energy: 0,
@@ -92,8 +91,6 @@ module.exports = function (app, passport) {
                     darkMatter: 0
                 },
                 ringWidth: 1,
-=======
->>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
                 levels: 1,
             },
             { upsert: true },
@@ -195,7 +192,6 @@ module.exports = function (app, passport) {
                 oxygen: station.resources.oxygen,
                 energy: station.resources.energy,
                 currency: station.resources.currency,
-<<<<<<< HEAD
                 ddarkMatter: station.delta.darkMatter,
                 dminerals: station.delta.minerals,
                 dfood: station.delta.food,
@@ -204,8 +200,6 @@ module.exports = function (app, passport) {
                 denergy: station.delta.energy,
                 dcurrency: station.delta.currency,
                 one: station.level.one,
-=======
->>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
                 levels: station.levels,
                 X: station.location.X,
                 Y: station.location.Y, 
@@ -236,8 +230,6 @@ module.exports = function (app, passport) {
     var Station = require('./models/Station.js');
     var installation = require('./models/installation.js');
     app.post('/install', isLoggedIn, function (req, res) {
-<<<<<<< HEAD
-=======
         installation.find({}, function (err, installations){
             var context = {
                 sid: req.body.sid,
@@ -268,7 +260,6 @@ module.exports = function (app, passport) {
             };
             res.render('install', context);
         });
->>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
         
         Station.findById(req.body.sid, function (err, station) {
             if (err) { console.error(err.stack); }
@@ -319,8 +310,6 @@ module.exports = function (app, passport) {
           
     //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
-<<<<<<< HEAD
-        
          installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
             
@@ -369,7 +358,6 @@ module.exports = function (app, passport) {
                 }
             });
         });
-=======
         //var installation1 = req.body._id
         installation.findOne({ _id: req.body._id }, {
             _id: installation._id,
@@ -430,7 +418,6 @@ module.exports = function (app, passport) {
                 
             }
         );
->>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
     });
     //custom 404 page
     app.use(function (req, res) {
