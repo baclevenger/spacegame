@@ -81,6 +81,7 @@ module.exports = function (app, passport) {
                     minerals: 1000,
                     darkMatter: 20
                 }, 
+<<<<<<< HEAD
                 delta: {
                     currency: 0,
                     energy: 0,
@@ -91,6 +92,8 @@ module.exports = function (app, passport) {
                     darkMatter: 0
                 },
                 ringWidth: 1,
+=======
+>>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
                 levels: 1,
             },
             { upsert: true },
@@ -192,6 +195,7 @@ module.exports = function (app, passport) {
                 oxygen: station.resources.oxygen,
                 energy: station.resources.energy,
                 currency: station.resources.currency,
+<<<<<<< HEAD
                 ddarkMatter: station.delta.darkMatter,
                 dminerals: station.delta.minerals,
                 dfood: station.delta.food,
@@ -200,6 +204,8 @@ module.exports = function (app, passport) {
                 denergy: station.delta.energy,
                 dcurrency: station.delta.currency,
                 one: station.level.one,
+=======
+>>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
                 levels: station.levels,
                 X: station.location.X,
                 Y: station.location.Y, 
@@ -230,6 +236,39 @@ module.exports = function (app, passport) {
     var Station = require('./models/Station.js');
     var installation = require('./models/installation.js');
     app.post('/install', isLoggedIn, function (req, res) {
+<<<<<<< HEAD
+=======
+        installation.find({}, function (err, installations){
+            var context = {
+                sid: req.body.sid,
+                installations: installations.map(function (installation) {
+                    return {
+                        _id: installation._id,
+                        name: installation.name,
+                        description: installation.description,
+                        graphic: installation.graphic,
+                        currency: installation.cost.currency,
+                        energy: installation.cost.energy,
+                        oxygen: installation.cost.oxygen,
+                        water: installation.cost.water,
+                        food: installation.cost.food,
+                        minerals: installation.cost.minerals,
+                        darkMatter: installation.cost.darkMatter,
+                        dcurrency: installation.delta.currency,
+                        denergy: installation.delta.energy,
+                        doxygen: installation.delta.oxygen,
+                        dwater: installation.delta.water,
+                        dfood: installation.delta.food,
+                        dminerals: installation.delta.minerals,
+                        ddarkMatter: installation.delta.darkMatter
+                        
+
+                    }
+                })
+            };
+            res.render('install', context);
+        });
+>>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
         
         Station.findById(req.body.sid, function (err, station) {
             if (err) { console.error(err.stack); }
@@ -280,6 +319,7 @@ module.exports = function (app, passport) {
           
     //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
+<<<<<<< HEAD
         
          installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
@@ -329,6 +369,68 @@ module.exports = function (app, passport) {
                 }
             });
         });
+=======
+        //var installation1 = req.body._id
+        installation.findOne({ _id: req.body._id }, {
+            _id: installation._id,
+            name: installation.name,
+            description: installation.description,
+            graphic: installation.graphic,
+            currency: "installation.cost.currency",
+            energy: "installation.cost.energy",
+            oxygen: "installation.cost.oxygen",
+            water: "installation.cost.water",
+            food: "installation.cost.food",
+            minerals: "installation.cost.minerals",
+            darkMatter: "installation.cost.darkMatter",
+            dcurrency: "installation.delta.currency",
+            denergy: "installation.delta.energy",
+            doxygen: "installation.delta.oxygen",
+            dwater: "installation.delta.water",
+            dfood: "installation.delta.food",
+            dminerals: "installation.delta.minerals",
+            ddarkMatter: "installation.delta.darkMatter"
+        })
+        
+        
+        Station.update(
+            {_id: req.body.sid }, {
+                $inc: { "rescources.currency":999
+                    //resources: {
+                    //    currency: 1000,
+                    //    energy: 1000,
+                    //    oxygen: 1000,
+                    //    water: 1000,
+                    //    food: 1000,
+                    //    minerals: 1000,
+                    //    darkMatter: 20
+                    //}
+                }
+                    
+                   // the installation they select
+            },
+            
+            { upsert: true },
+            function (err) {
+                if (err) {
+                    console.error(err.stack);
+                    req.session.flash = {
+                        type: 'danger',
+                        intro: 'Ooops!',
+                        message: 'There was an error proccesing your request.',
+                    };
+                    return res.redirect(303, '/install');
+                }
+                req.session.flash = {
+                    type: 'success',
+                    intro: 'Thank you!',
+                    message: 'You will be notified when this vacation is in season.',
+                };
+                return res.redirect(303, '/ingame');
+                
+            }
+        );
+>>>>>>> c137fd1d844202907c463bb5bd12bc64a3103378
     });
     //custom 404 page
     app.use(function (req, res) {
