@@ -1,25 +1,53 @@
+<!--<div id="1" class="center"></div>-->
+<title>Infinite Space admin Page</title>
+   <!-- LOCAL INFORMATION -->
+<h1 class="center">Admin Page</h1>
+<div id="Resour">
+    <ul id="banner">
 
-<div id="1" class="center"></div>
-<title>Infinite Space</title>
-<p3>
-    <!-- LOCAL INFORMATION -->
-    <a href="/profile">
-        <button type="submit" class="btn btn-default">Profile</button>
-    </a>
+        <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
+        <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
+        <li class="resources">Food:{{food}}+{{dfood}}</li>
+        <li class="resources"> Water:{{water}}+{{dwater}}</li>
+        <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
+        <li class="resources">Energy:{{energy}}+{{denergy}}</li>
+        <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
+        <li class="resources">Station Levels:{{levels}}</li>
+        <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
+        <a href="/profile">
+            <button type="submit" class="btn btn-default">Profile</button>
+        </a>
+        <form name="install" action="/install" method="post">
+            <input type="hidden" name="sid" id="sid" value={{sid}}>
+            <button type="submit" class="btn btn-default">Build</button>
+        </form>
+    </ul>
 
-</p3>
-<h1 class="center">
-    <!--search bar-->
-    This is the admin page!!
+</div>
+
+<div style="text-align:center" id="stationPG" class="col-md-6">
+
+    <p>{{stationname}}</p>
+
+</div>
+
+<div style="text-align:center" id="contextual" class="col-md-6">
+    <p>Do Stuff</p>
+
+</div>
 
 
-</h1>
+{{#if error}}
+<div class="center">{{error}}</div>
+{{/if}}
 
 
-<div id="1" class="center">
+<br />
+
+<div id="1">
     <p2>
         <a href="/logout">
-            <button type="submit" class="btn btn-default">Log Out</button>
+            <button type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
         </a>
     </p2>
 

@@ -14,63 +14,57 @@
     {{/if}}
 
 
-<p1>
-    <form method="post" action="/stationcreate">
-        
-        
-        
-
-        <label for="Station"></label>
-        <input type="text" id="StationName" name="StationName" placeholder="Enter A Station Name" /><br />
-
-        <ul>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Human">Human<br></li>
-                <div id="two" class="humans"><strong>Humans-</strong>(well rounded, needs oxygen and food) Humans are Carbon based Lifeforms originating from the water dense planet Earth. They require a constant supply of oxygen and require frequent supplies of food and water. They are quick at building, but use many resources, often times leaving planets barren. They are quick to go to war, but are happiest while in times of peace. They let democracy (so they call it) run their civilization, making foreign affairs somewhat slow, but many of their peoples remain happy. They have no dire need for minerals, but do not mind having plenty laying around for quick use. </div>
-            </div>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Petrians">Petrians<br></li>
-                <div id="two" class="petrians"><strong>Petrians-</strong>(requires minerals and food, does not require oxygen) These large rock based lifeforms are an old race, originating from a system of large meteors and a planet of nearly all minerals. The planet was often struck with meteors, so they started shield generation research early on. They are slower to build, due to their large, slow, and awkward bodies. They repopulate at a slower rate, by growing from the minerals of their planet itself. They build slow, sturdy ships out of the strongest steels and alloys. They require a constant supply of minerals to keep their bodies built up after decay, or they will crumble to nothing. They like to have storages of food, a secondary requirement, but have no need for oxygen other than trade and building.</div>
-            </div>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Allozinates">Allozinates<br></li>
-                <div id="two" class="allozinates"><strong>Allozinates-</strong>(requires energy and oxygen, does not require food)These cybotic beings originate from an unknown extinct race. They now represent the last of this race, machines built to do laborious tasks, now the only reminisce of computer savy race. These robots are controlled by a large AI computer program in a system called Courdia, mostly empty space heavy with static electricity. These robots do not require food, but need a constant supply of energy, and need oxygen to keep from overheating. They are very quick to make political and war decisions, due to the supreme ruler AI, however they do not reproduce nearly as quickly. Each unit, being an AI, has its own personality, needs, and wants, but can communicate quickly with its network of Allozinates. </div>
-            </div>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Poseons">Poseons<br></li>
-                <div id="two" class="poseons"><strong>Poseons-</strong> (requires water and energy, does not require oxygen) Poseons are a seemingly new race. They originate from a mostly water based, high gravity system commonly called Atlantica. They are nearly all water in body makeup, having only a small amount of carbon based tissue resembling gel, surrounding their liquid interior. Although a newer species they have excelled in travel. They are able to travel great distances at high speeds, and with little energy. They have relatively normal intelligence levels making trade and diplomacy easy. They use a form of socialism, lead by a leader elected every 10 years, making official actions quick. They require a constant supply of water, and require food, but have no necessary need for oxygen. </div>
-            </div>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Sciren">Sciren<br></li>
-                <div id="two" class="sciren"><strong>Scirens-</strong> (Requires oxygen) Scirenes come from very energetic systems. They originate from a system called Schemita, but have settled other various system for research purposes. They are very similar to the human race, growing at a steady rate, but do not like confrontation. They excel however in all manners of science and research, and can manage trade. They require food and oxygen to live, but have little need for energy due to their high efficiency systems. They defend their research stations at all costs, and are lead by a representative dictatorships. Many Scirenes care only about their work, and and find little need to concern themselves with politics or war, they will however sell their research at the right price. </div>
-            </div>
-
-            <div id="button">
-                <li><input type="radio" name="race" value="Entomoid">Entomoids</li>
-                <div id="two" class="entomoid"><strong>Entomoids-</strong> (Requires oxygen and food) This race inhabits a planet dense in jungle biomes called Amatomia. They are fairly intelligent, able to do basic trades and some research. They work very well together, their bug like bodies with six legs and six arms allow them to network and build at amazing speeds, very efficiently. They repopulate quickly forming colonies of overwhelming power. They however require food at all times. They are always on the brink of starvation, expanding to new planets in search of food. They need oxygen in small amounts, and have little to no need for minerals, due to their efficient building systems. They are very well rounded in battle, fragile bodies encased in hard exoskeletons. They are clumsy but often overwhelm enemies in sheer numbers. Their ships cost little to build, and often attack in swarms of fiery clouds in space. They often remain peaceful if well fed, creating great structures, and often selling their excess resources. </div>
-            </div>
+    <p1 class="stationcreate">
+        <form method="post" action="/stationcreate">
 
 
 
-        </ul>
 
-        <button type="submit" class="btn btn-default">Create Station</button>
-    </form>
-</p1>
+            <label for="Station"></label>
+            <input class="form" type="text" id="StationName" name="StationName" placeholder="Enter A Station Name" /><br />
 
-<div id="1" class="center">
-    <p2>
-        <form action="/logout">
-            <button type="submit" class="btn btn-default">Home</button><a href="/logout"></a>
+            <ul class="race">
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Human">Human<br></li>
+                    <div id="two" class="humans"><strong>Humans-</strong>(well rounded, needs oxygen and food) Humans are Carbon based Lifeforms originating from the water dense planet Earth. They require a constant supply of oxygen and require frequent supplies of food and water. They are quick at building, but use many resources, often times leaving planets barren. They are quick to go to war, but are happiest while in times of peace. They let democracy (so they call it) run their civilization, making foreign affairs somewhat slow, but many of their peoples remain happy. They have no dire need for minerals, but do not mind having plenty laying around for quick use. </div>
+                </div>
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Petrians">Petrians<br></li>
+                    <div id="two" class="petrians"><strong>Petrians-</strong>(requires minerals and food, does not require oxygen) These large rock based lifeforms are an old race, originating from a system of large meteors and a planet of nearly all minerals. The planet was often struck with meteors, so they started shield generation research early on. They are slower to build, due to their large, slow, and awkward bodies. They repopulate at a slower rate, by growing from the minerals of their planet itself. They build slow, sturdy ships out of the strongest steels and alloys. They require a constant supply of minerals to keep their bodies built up after decay, or they will crumble to nothing. They like to have storages of food, a secondary requirement, but have no need for oxygen other than trade and building.</div>
+                </div>
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Allozinates">Allozinates<br></li>
+                    <div id="two" class="allozinates"><strong>Allozinates-</strong>(requires energy and oxygen, does not require food)These cybotic beings originate from an unknown extinct race. They now represent the last of this race, machines built to do laborious tasks, now the only reminisce of computer savy race. These robots are controlled by a large AI computer program in a system called Courdia, mostly empty space heavy with static electricity. These robots do not require food, but need a constant supply of energy, and need oxygen to keep from overheating. They are very quick to make political and war decisions, due to the supreme ruler AI, however they do not reproduce nearly as quickly. Each unit, being an AI, has its own personality, needs, and wants, but can communicate quickly with its network of Allozinates. </div>
+                </div>
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Poseons">Poseons<br></li>
+                    <div id="two" class="poseons"><strong>Poseons-</strong> (requires water and energy, does not require oxygen) Poseons are a seemingly new race. They originate from a mostly water based, high gravity system commonly called Atlantica. They are nearly all water in body makeup, having only a small amount of carbon based tissue resembling gel, surrounding their liquid interior. Although a newer species they have excelled in travel. They are able to travel great distances at high speeds, and with little energy. They have relatively normal intelligence levels making trade and diplomacy easy. They use a form of socialism, lead by a leader elected every 10 years, making official actions quick. They require a constant supply of water, and require food, but have no necessary need for oxygen. </div>
+                </div>
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Sciren">Sciren<br></li>
+                    <div id="two" class="sciren"><strong>Scirens-</strong> (Requires oxygen) Scirenes come from very energetic systems. They originate from a system called Schemita, but have settled other various system for research purposes. They are very similar to the human race, growing at a steady rate, but do not like confrontation. They excel however in all manners of science and research, and can manage trade. They require food and oxygen to live, but have little need for energy due to their high efficiency systems. They defend their research stations at all costs, and are lead by a representative dictatorships. Many Scirenes care only about their work, and and find little need to concern themselves with politics or war, they will however sell their research at the right price. </div>
+                </div>
+
+                <div id="button">
+                    <li><input type="radio" name="race" value="Entomoid">Entomoids</li>
+                    <div id="two" class="entomoid"><strong>Entomoids-</strong> (Requires oxygen and food) This race inhabits a planet dense in jungle biomes called Amatomia. They are fairly intelligent, able to do basic trades and some research. They work very well together, their bug like bodies with six legs and six arms allow them to network and build at amazing speeds, very efficiently. They repopulate quickly forming colonies of overwhelming power. They however require food at all times. They are always on the brink of starvation, expanding to new planets in search of food. They need oxygen in small amounts, and have little to no need for minerals, due to their efficient building systems. They are very well rounded in battle, fragile bodies encased in hard exoskeletons. They are clumsy but often overwhelm enemies in sheer numbers. Their ships cost little to build, and often attack in swarms of fiery clouds in space. They often remain peaceful if well fed, creating great structures, and often selling their excess resources. </div>
+                </div>
+
+
+
+            </ul>
+
+            <button type="submit" class="btn btn-default">Create Station</button>
         </form>
-    </p2>
+    </p1>
 
-</div>
+
+
 
 
 
