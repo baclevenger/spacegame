@@ -46,9 +46,9 @@ module.exports = function (app, passport) {
         var maxstations = req.user.maxstations;
         var stationcount = req.user.stationcount;
         //console test for station count
-        console.log("station count =", stationcount);
+        console.log("station count =",stationcount);
         console.log("max stations =", maxstations);
-        
+
         //start if 
         if (maxstations > stationcount) {
             res.render('stationcreate', {
@@ -117,7 +117,7 @@ module.exports = function (app, passport) {
         user.update(
             { _id: req.user._id },
             {
-                stationcount: req.user.stationcount + 1
+                stationcount: req.user.stationcount +1
             },
             { upsert: true },
             function (err) {
@@ -144,21 +144,21 @@ module.exports = function (app, passport) {
     // =====================================
     // show the Profile form
     app.get('/profile', isLoggedIn, function (req, res) {
-        
-        Station.findOne({ uID: req.user._id }, function (err, station) {
-            var context = {
-                bclass: station.race,
-                stationname: station.name, 
-                race: station.race,
-                darkMatter: station.resources.darkMatter,
-                levels: station.levels,
-                X: station.location.X,
-                Y: station.location.Y, 
-                Z: station.location.Z,
-                test: req.user
-            }
-            res.render('profile', context);
-        });
+    
+    Station.findOne({ uID: req.user._id }, function (err, station) {
+        var context = {
+            bclass: station.race,
+            stationname: station.name, 
+            race: station.race,
+            darkMatter: station.resources.darkMatter,
+            levels: station.levels,
+            X: station.location.X,
+           Y: station.location.Y, 
+           Z: station.location.Z,
+           test: req.user
+        }
+       res.render('profile', context);
+    });
         
     });
     // =====================================
@@ -168,18 +168,18 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
-    
+     
     // =====================================
     // ingame  ==============================
     // =====================================
     var Station = require('./models/Station.js');
-    var user = require('./models/user.js');
+    var user = require('./models/user.js'); 
     
     app.get('/ingame', isLoggedIn, function (req, res) {
         
-        
+       
         Station.findOne({ uID: req.user._id }, function (err, station) {
-            //   console.log(station.levels)
+         //   console.log(station.levels)
             var context = {
                 sid: station._id,
                 bclass: station.race,
@@ -209,20 +209,20 @@ module.exports = function (app, passport) {
 
                 
             }
-            
-            var admin = req.user.admin;
-            if (admin == true) {
-                res.render('admin', context);
-            }
-            else {
-                res.render('ingame', context);
-            }
-        });
-    });
-    //});
-    //        });
+
+                    var admin = req.user.admin;
+                    if (admin == true) {
+                        res.render('admin', context);
+                    }
+                    else {
+                        res.render('ingame', context);
+                    }
+            });
+            });
+//});
+//        });
     
-    
+       
     // =====================================
     // install  ==============================
     // =====================================
@@ -237,13 +237,13 @@ module.exports = function (app, passport) {
             //only displays installations they can afford
             
             installation.find({
-                "cost.currency": { $lte: station.resources.currency },
-                "cost.energy": { $lte: station.resources.energy },
-                "cost.oxygen": { $lte: station.resources.oxygen },
-                "cost.water": { $lte: station.resources.water },
-                "cost.food": { $lte: station.resources.food },
-                "cost.minerals": { $lte: station.resources.minerals },
-                "cost.darkMatter": { $lte: station.resources.darkMatter }
+               "cost.currency": { $lte: station.resources.currency},
+               "cost.energy": { $lte: station.resources.energy},
+               "cost.oxygen": { $lte: station.resources.oxygen},
+               "cost.water": { $lte: station.resources.water},
+               "cost.food": { $lte: station.resources.food },
+               "cost.minerals": { $lte: station.resources.minerals },
+               "cost.darkMatter": { $lte: station.resources.darkMatter }
 
             }, function (err, installations) {
                 if (err) { console.error(err.stack); }
@@ -277,17 +277,17 @@ module.exports = function (app, passport) {
         })
     
     });
-    
+          
     //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
         
-        installation.findById(req.body._id, function (err, install) {
+         installation.findById(req.body._id, function (err, install) {
             if (err) return handleError(err);
             
             Station.findById(req.body.sid, function (err, station) {
                 if (err) return handleError(err);
                 
-                if (station.resources.currency >= install.cost.currency && 
+                    if (station.resources.currency >= install.cost.currency && 
                     station.resources.energy >= install.cost.energy && 
                     station.resources.oxygen >= install.cost.oxygen &&
                     station.resources.water >= install.cost.water &&
@@ -295,27 +295,27 @@ module.exports = function (app, passport) {
                     station.resources.minerals >= install.cost.minerals &&
                     station.resources.darkMatter >= install.cost.darkMatter &&
                     station.level.one.length < 8) {
-                    
-                    station.resources.currency = station.resources.currency - install.cost.currency;
-                    station.resources.energy = station.resources.energy - install.cost.energy;
-                    station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
-                    station.resources.water = station.resources.water - install.cost.water;
-                    station.resources.food = station.resources.food - install.cost.food;
-                    station.resources.minerals = station.resources.minerals - install.cost.minerals;
-                    station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
-                    
-                    station.delta.currency = station.delta.currency + install.delta.currency;
-                    station.delta.energy = station.delta.energy + install.delta.energy;
-                    station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
-                    station.delta.water = station.delta.water + install.delta.water;
-                    station.delta.food = station.delta.food + install.delta.food;
-                    station.delta.minerals = station.delta.minerals + install.delta.minerals;
-                    station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
-                    
+                        
+                        station.resources.currency = station.resources.currency - install.cost.currency;
+                        station.resources.energy = station.resources.energy - install.cost.energy;
+                        station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
+                        station.resources.water = station.resources.water - install.cost.water;
+                        station.resources.food = station.resources.food - install.cost.food;
+                        station.resources.minerals = station.resources.minerals - install.cost.minerals;
+                        station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
+                        
+                        station.delta.currency = station.delta.currency + install.delta.currency;
+                        station.delta.energy = station.delta.energy + install.delta.energy;
+                        station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
+                        station.delta.water = station.delta.water + install.delta.water;
+                        station.delta.food = station.delta.food + install.delta.food;
+                        station.delta.minerals = station.delta.minerals + install.delta.minerals;
+                        station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
+
                     //installations take up space in the station
                     station.level.one.push(install);
                     console.log(station.level.one[0]);
-                    
+
                     station.save(function (err) {
                         if (err) { console.error(err.stack); }
                         res.redirect('/ingame');
@@ -344,16 +344,16 @@ module.exports = function (app, passport) {
         res.send('500 - Server Error');
     });
 }
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-    
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-    
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+    // route middleware to make sure a user is logged in
+    function isLoggedIn(req, res, next) {
+        
+        // if user is authenticated in the session, carry on 
+        if (req.isAuthenticated())
+            return next();
+        
+        // if they aren't redirect them to the home page
+        res.redirect('/');
 
 
     //https://scotch.io/tutorials/easy-node-authentication-setup-and-local 
-}
+    }

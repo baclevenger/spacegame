@@ -11,7 +11,7 @@ var stationSchema = mongoose.Schema({
         Y: Number,
         Z: Number
     },
-    level: {
+    level:{
         0: {
 
         },   
@@ -44,21 +44,21 @@ var stationSchema = mongoose.Schema({
 
 
             }],
-        
+
         two: [{
-                type: Schema.Types.ObjectId,
-                ref: 'installation'
-            }],
-        
+            type: Schema.Types.ObjectId,
+            ref: 'installation'
+        }],
+
         three: [{
-                type: Schema.Types.ObjectId,
-                ref: 'installation'
-            }],
+            type: Schema.Types.ObjectId,
+            ref: 'installation'
+        }],
               
     },
-    
+
     ringWidth: Number,
-    
+
     resources: {
         currency: Number,
         energy: Number,

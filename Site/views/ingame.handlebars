@@ -1,30 +1,31 @@
-<!--<div id="1" class="center"></div>-->
-<title>Infinite Space</title>
 
-<!-- LOCAL INFORMATION -->
+    <!--<div id="1" class="center"></div>-->
+    <title>Infinite Space</title>
 
+    <!-- LOCAL INFORMATION -->
+    
 
-<div id="Resour">
-    <ul id="banner">
-        <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
-        <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
-        <li class="resources">Food:{{food}}+{{dfood}}</li>
-        <li class="resources"> Water:{{water}}+{{dwater}}</li>
-        <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
-        <li class="resources">Energy:{{energy}}+{{denergy}}</li>
-        <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
-        <li class="resources">Station Levels:{{levels}}</li>
-        <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
-        <a href="/profile">
-            <button type="submit" class="btn btn-default">Profile</button>
-        </a>
-        <form name="install" action="/install" method="post">
-            <input type="hidden" name="sid" id="sid" value={{sid}}>
-            <button type="submit" class="btn btn-default">Build</button>
-        </form>
-    </ul>
-
-</div>
+    <div id="Resour">
+        <ul id="banner">
+            <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
+            <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
+            <li class="resources">Food:{{food}}+{{dfood}}</li>
+            <li class="resources"> Water:{{water}}+{{dwater}}</li>
+            <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
+            <li class="resources">Energy:{{energy}}+{{denergy}}</li>
+            <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
+            <li class="resources">Station Levels:{{levels}}</li>
+            <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
+            <a href="/profile">
+                <button type="submit" class="btn btn-default">Profile</button>
+            </a>
+            <form name="install" action="/install" method="post">
+                <input type="hidden" name="sid" id="sid" value={{sid}}>
+                <button type="submit" class="btn btn-default">Build</button>
+            </form>
+        </ul>
+        
+    </div> 
 
 <div style="text-align:center" id="stationPG" class="col-md-6">
 
@@ -35,7 +36,7 @@
     <img src="{{{graphic}}}">
 
     {{/installations}}
-
+    
 </div>
 
 <div style="text-align:center" id="contextual" class="col-md-6">
@@ -43,24 +44,24 @@
 
 </div>
 
-
+ 
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
+ 
 
-
-<br />
+<br/>
 
 <div id="1">
     <p2>
         <a href="/logout">
-            <button type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
+            <button  type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
         </a>
     </p2>
 
 </div>
+    
+         
 
 
-
-
-
+     
