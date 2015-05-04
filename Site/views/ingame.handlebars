@@ -30,13 +30,30 @@
 <div style="text-align:center" id="stationPG" class="col-md-6">
 
     <p id="sName">{{stationname}}</p>
-    {{#installations}}
-    <h3>{{name}}</h3>
+   
+<!--     <h3>{{name}}</h3>
     <h3>{{description}}</h3>
     <img src="{{{graphic}}}">
+ 
+    <table>
+        <tbody>
+            <tr>
+                <tb> <img src="{{{graphic}}}"> </tb>
+                <tb> <img src="{{{graphic}}}"> </tb>
+                <tb>  </tb>
+            </tr>
+        </tbody>
+        </table>-->
+    <ul>
+        {{#installations}}
+        <li><img src="{{{graphic}}}"></li>
+        {{/installations}}
+    </ul>
+       
 
-    {{/installations}}
-    
+
+
+
 </div>
 
 <div style="text-align:center" id="contextual" class="col-md-6">
