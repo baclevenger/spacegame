@@ -1,34 +1,59 @@
 <script type="text/javascript" src="jq.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js" type="text/javascript"></script>
 
-    <!--<div id="1" class="center"></div>-->
-    <title>Infinite Space</title>
+{{#section 'head'}}
+<script src="handlebars.js" type="text/javascript"></script>
 
-    <!-- LOCAL INFORMATION -->
-    
+<script id="installlationTemplate" type="text/x-handlebars-template">
+    <h1> Installations</h1>
+    <h2>available for Station: {{sssid}}</h2>
+    <p1>
+        {{#each binstallations}}
+        <form name="build" action="/install1" method="post">
+            <input type="hidden" name="sid" id="sid" value={{sssid}}>
 
-    <div id="Resour">
-        <ul id="banner">
-            <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
-            <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
-            <li class="resources">Food:{{food}}+{{dfood}}</li>
-            <li class="resources"> Water:{{water}}+{{dwater}}</li>
-            <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
-            <li class="resources">Energy:{{energy}}+{{denergy}}</li>
-            <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
-            <li class="resources">Station Levels:{{levels}}</li>
-            <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
-            <a href="/profile">
-                <button type="submit" class="btn btn-default">Profile</button>
-            </a>
-            <form name="install" id="install" role="form" action="/process?form=install" method="post">
-                <input type="hidden" name="sid" id="sid" value={{sid}}>
-                <button value="build" type="submit" class="btn btn-default">Build</button>
-            </form>
-        </ul>
-        
-    </div> 
+            <h3>{{name}}</h3>
+            <h3>{{description}}</h3>
+
+            <input type="hidden" name="_id" id="_id" value={{_id}}>
+
+            <button type="submit" class="btn btn-default">Build</button>
+        </form>
+        <img src="{{{graphic}}}">
+        {{/each}}
+
+    </p1>
+
+</script>
+
+{{/section}}
+<!--<div id="1" class="center"></div>-->
+<title>Infinite Space</title>
+
+<!-- LOCAL INFORMATION -->
+
+
+<div id="Resour">
+    <ul id="banner">
+        <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
+        <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
+        <li class="resources">Food:{{food}}+{{dfood}}</li>
+        <li class="resources"> Water:{{water}}+{{dwater}}</li>
+        <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
+        <li class="resources">Energy:{{energy}}+{{denergy}}</li>
+        <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
+        <li class="resources">Station Levels:{{levels}}</li>
+        <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
+        <a href="/profile">
+            <button type="submit" class="btn btn-default">Profile</button>
+        </a>
+        <form name="install" id="install" role="form" action="/install" method="post">
+            <input type="hidden" name="sid" id="sid" value={{sid}}>
+            <button id="btnBuildAjax" value="build" type="submit" class="btn btn-default">Build</button>
+        </form>
+    </ul>
+
+</div>
 
 <div style="text-align:center" id="stationPG" class="col-md-6">
 
@@ -39,7 +64,7 @@
     <img src="{{{graphic}}}">
 
     {{/installations}}
-    
+
 </div>
 
 <div style="text-align:center" id="contextual" class="col-md-6">
@@ -47,24 +72,61 @@
 
 </div>
 
- 
+
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
- 
 
-<br/>
+
+<br />
 
 <div id="1">
     <p2>
         <a href="/logout">
-            <button  type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
+            <button type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
         </a>
     </p2>
 
 </div>
-    
-         
+{{#section 'jquery'}}
+<script>
+    $(document).ready(function () {
+
+        var installlationTemplate = Handlebars.compile(
+            $('#installlationTemplate').html());
+
+        var $contextual = $('#contextual');
+
+        $('#install').on('submit', function (evt) {
+            evt.preventDefault();
+            var action = $(this).attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(data){
+                    if (data) {
+                        $contextual.html(installlationTemplate(data));
+                    } else {
+                        $contextual.html('There was a problem. inner');
+                    }
+                },
+                error: function () {
+                    $contextual.html('There was a problem. outer');
+                }
+            });
+        });
+
+    });
+</script>
+{{/section}}
 
 
-     
+
+
+
+
+
+
+
+

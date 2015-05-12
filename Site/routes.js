@@ -229,14 +229,14 @@ module.exports = function (app, passport) {
     
     var Station = require('./models/Station.js');
     var installation = require('./models/installation.js');
-    app.post('/install', isLoggedIn, function (req, res) {
+    app.post('/install', function (req, res) {
         
         Station.findById(req.body.sid, function (err, station) {
             if (err) { console.error(err.stack); }
             
             //only displays installations they can afford
             
-            installation.find({
+            installation.findOne({
                "cost.currency": { $lte: station.resources.currency},
                "cost.energy": { $lte: station.resources.energy},
                "cost.oxygen": { $lte: station.resources.oxygen},
@@ -245,12 +245,11 @@ module.exports = function (app, passport) {
                "cost.minerals": { $lte: station.resources.minerals },
                "cost.darkMatter": { $lte: station.resources.darkMatter }
 
-            }, function (err, installations) {
+            }, function (err, installation) {
                 if (err) { console.error(err.stack); }
-                var context = {
-                    installations: installations.map(function (installation) {
-                        return {
-                            sid: req.body.sid,
+                res.json({
+
+                            sssid: req.body.sid,
                             _id: installation._id,
                             name: installation.name,
                             description: installation.description,
@@ -269,10 +268,9 @@ module.exports = function (app, passport) {
                             dfood: installation.delta.food,
                             dminerals: installation.delta.minerals,
                             ddarkMatter: installation.delta.darkMatter
-                        }
-                    })
-                };
-                res.end(JSON.stringify(context));
+
+                });
+                
             });
         })
     
@@ -328,6 +326,14 @@ module.exports = function (app, passport) {
                     res.redirect('/ingame')
                 }
             });
+        });
+    });
+    app.get('/data/nursery-rhyme', function (req, res) {
+        res.json({
+            animal: 'squirrel',
+            bodyPart: 'tail',
+            adjective: 'bushy',
+            noun: 'heck',
         });
     });
     //custom 404 page
