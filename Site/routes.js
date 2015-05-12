@@ -272,7 +272,7 @@ module.exports = function (app, passport) {
                         }
                     })
                 };
-                res.render('install', context);
+                res.end(JSON.stringify(context));
             });
         })
     
