@@ -229,27 +229,28 @@ module.exports = function (app, passport) {
     
     var Station = require('./models/Station.js');
     var installation = require('./models/installation.js');
-    app.post('/install', function (req, res) {
+    app.post('/install', isLoggedIn, function (req, res) {
         
         Station.findById(req.body.sid, function (err, station) {
             if (err) { console.error(err.stack); }
             
             //only displays installations they can afford
             
-            installation.findOne({
-               "cost.currency": { $lte: station.resources.currency},
-               "cost.energy": { $lte: station.resources.energy},
-               "cost.oxygen": { $lte: station.resources.oxygen},
-               "cost.water": { $lte: station.resources.water},
-               "cost.food": { $lte: station.resources.food },
-               "cost.minerals": { $lte: station.resources.minerals },
-               "cost.darkMatter": { $lte: station.resources.darkMatter }
+            installation.find({
+                "cost.currency": { $lte: station.resources.currency },
+                "cost.energy": { $lte: station.resources.energy },
+                "cost.oxygen": { $lte: station.resources.oxygen },
+                "cost.water": { $lte: station.resources.water },
+                "cost.food": { $lte: station.resources.food },
+                "cost.minerals": { $lte: station.resources.minerals },
+                "cost.darkMatter": { $lte: station.resources.darkMatter }
 
-            }, function (err, installation) {
+            }, function (err, installations) {
                 if (err) { console.error(err.stack); }
-                res.json({
-
-                            sssid: req.body.sid,
+                var context = {
+                    binstallations: installations.map(function (installation) {
+                        return {
+                            sid: req.body.sid,
                             _id: installation._id,
                             name: installation.name,
                             description: installation.description,
@@ -268,14 +269,15 @@ module.exports = function (app, passport) {
                             dfood: installation.delta.food,
                             dminerals: installation.delta.minerals,
                             ddarkMatter: installation.delta.darkMatter
-
-                });
-                
+                        }
+                    })
+                };
+                res.json(context);
             });
         })
     
     });
-          
+        
     //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
         
@@ -329,6 +331,14 @@ module.exports = function (app, passport) {
         });
     });
     app.get('/data/nursery-rhyme', function (req, res) {
+        res.json({
+            animal: 'squirrel',
+            bodyPart: 'tail',
+            adjective: 'bushy',
+            noun: 'heck',
+        });
+    });
+    app.post('/data/nursery-rhyme', function (req, res) {
         res.json({
             animal: 'squirrel',
             bodyPart: 'tail',
