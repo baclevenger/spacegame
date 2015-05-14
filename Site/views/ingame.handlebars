@@ -5,12 +5,11 @@
 <script src="handlebars.js" type="text/javascript"></script>
 
 <script id="installlationTemplate" type="text/x-handlebars-template">
-    <h1> Installations</h1>
-    <h2>available for Station: \{{sssid}}</h2>
+    <h1> Installations available</h1>
     <p1>
         \{{#each binstallations}}
         <form name="build" action="/install1" method="post">
-            <input type="hidden" name="sid" id="sid" value=\{{sssid}}>
+            <input type="hidden" name="sid" id="sid" value=\{{sid}}>
 
             <h3>\{{name}}</h3>
             <h3>\{{description}}</h3>
