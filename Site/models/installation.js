@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var installationSchema = mongoose.Schema({
     name: String,
+    level: Number,
     description: String,
     graphic: String,
     req: [{

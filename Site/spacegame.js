@@ -71,25 +71,26 @@ installation.find(function (err, installations) {
     if (installations.length) return;
     
     new installation({
-        name: "Solar Panel",
-        description: "basic production unit of energy",
+        name: "Water Purifier",
+        description: "basic production unit of Water. It purifies water found in space, and that used in the station",
         graphic: "/images/instsmall/Dock1.jpg",
+        level: 0,
         cost: {
-            currency: 16,
-            energy: 5,
-            oxygen: 3,
-            water: 3,
-            food: 10,
-            minerals: 20,
+            currency: 25,
+            energy: 50,
+            oxygen: 50,
+            water: 50,
+            food: 50,
+            minerals: 50,
             darkMatter: 0,
         },
         delta: {
-            currency: 0,
-            energy: 25,
-            oxygen: 0,
-            water: 0,
-            food: 0,
-            minerals: 0,
+            currency: -1,
+            energy: -8,
+            oxygen: -1,
+            water: 20,
+            food: -1,
+            minerals: -1,
             darkMatter: 0
         }
     }).save();
@@ -97,103 +98,134 @@ installation.find(function (err, installations) {
     //new installation==============================================================================
     
     new installation({
-        name: "Hydroxification center",
-        description: "advanced production unit of water",
-        graphic: "/images/instsmall/images.jpg",
+        name: "Mining Laser",
+        description: "Lasers that cut into rock such as astroids, harvesting minerals needed for construction",
+        graphic: "/images/instsmall/engineering.jpg",
+        level: 0,
         cost: {
-            currency: 1600,
-            energy: 500,
-            oxygen: 300,
-            water: 300,
-            food: 1000,
-            minerals: 2000,
-            darkMatter: 0,
+            currency:25,
+            energy:50,
+            oxygen:50,
+            water:50,
+            food:50,
+            minerals:50,
+            darkMatter:0,
         },
         delta: {
-            currency: 0,
-            energy: 2500,
-            oxygen: 0,
-            water: 5000,
-            food: 0,
-            minerals: 0,
-            darkMatter: 0
+            currency:-2,
+            energy:-12,
+            oxygen:-1,
+            water:-1,
+            food:-1,
+            minerals:20,
+            darkMatter:0
         }
     }).save();
     
     //new installation==============================================================================
     
     new installation({
-        name: "osmosis chamber",
+        name: "Oxygen Purifier",
         description: "moderate production unit of water",
         graphic: "/images/instsmall/lock1.jpg",
+        level: 0,
         cost: {
-            currency: 160,
-            energy: 50,
-            oxygen: 30,
-            water: 30,
-            food: 100,
-            minerals: 200,
-            darkMatter: 0,
+            currency:25,
+            energy:50,
+            oxygen:50,
+            water:50,
+            food:50,
+            minerals:50,
+            darkMatter:0,
         },
         delta: {
-            currency: 0,
-            energy: 250,
-            oxygen: 0,
-            water: 500,
-            food: 0,
-            minerals: 0,
-            darkMatter: 0
+            currency:-2,
+            energy:-10,
+            oxygen:20,
+            water:-2,
+            food:-1,
+            minerals:-1,
+            darkMatter:0
         }
     }).save();
     
     //new installation==============================================================================
     
     new installation({
-        name: "mining hub",
-        description: "basic production unit of minerals",
+        name: "Generator",
+        description: "basic production unit of energy",
         graphic: "/images/instsmall/hall3.jpg",
+        level:0,
         cost: {
-            currency: 160,
-            energy: 50,
-            oxygen: 30,
-            water: 30,
-            food: 100,
-            minerals: 200,
-            darkMatter: 0,
+            currency:25,
+            energy:50,
+            oxygen:50,
+            water:50,
+            food:50,
+            minerals:50,
+            darkMatter:0,
         },
         delta: {
-            currency: 0,
-            energy: 250,
-            oxygen: 0,
-            water: 0,
-            food: 0,
-            minerals: 0,
-            darkMatter: 0
+            currency:-2,
+            energy:40,
+            oxygen:-1,
+            water:-2,
+            food:-1,
+            minerals:-4,
+            darkMatter:0
         }
     }).save();
     
     //new installation==============================================================================
     
     new installation({
-        name: "hydro plant",
-        description: "basic production unit of water",
+        name: "Farm",
+        description: "basic production unit of food",
         graphic: "/images/instsmall/o2reclaim.jpg",
+        level: 0,
         cost: {
-            currency: 16,
-            energy: 5,
-            oxygen: 3,
-            water: 3,
-            food: 10,
-            minerals: 20,
+            currency:25,
+            energy:50,
+            oxygen:50,
+            water:50,
+            food:50,
+            minerals:50,
+            darkMatter:0,
+        },
+        delta: {
+            currency:-2,
+            energy:-5,
+            oxygen:-4,
+            water:-4,
+            food:20,
+            minerals:-2,
+            darkMatter: 0
+        }
+    }).save();
+
+    //new installation==============================================================================
+    
+    new installation({
+        name: "Trade Center",
+        description: "basic production unit of money, You trade resources for currency.",
+        graphic: "/images/instsmall/hall3.jpg",
+        level: 0,
+        cost: {
+            currency: 25,
+            energy: 50,
+            oxygen: 50,
+            water: 50,
+            food: 50,
+            minerals: 50,
             darkMatter: 0,
         },
         delta: {
-            currency: 0,
-            energy: 25,
-            oxygen: 0,
-            water: 0,
-            food: 0,
-            minerals: 0,
+            currency: -30,
+            energy: -30,
+            oxygen: -30,
+            water: -30,
+            food: -30,
+            minerals: -30,
             darkMatter: 0
         }
     }).save();

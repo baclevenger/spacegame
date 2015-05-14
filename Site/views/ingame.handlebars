@@ -7,13 +7,13 @@
 
     <div id="Resour">
         <ul id="banner">
-            <li class="resources">DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
-            <li class="resources">Minerals:{{minerals}}+{{dminerals}}</li>
-            <li class="resources">Food:{{food}}+{{dfood}}</li>
-            <li class="resources"> Water:{{water}}+{{dwater}}</li>
-            <li class="resources">Oxygen:{{oxygen}}+{{doxygen}}</li>
-            <li class="resources">Energy:{{energy}}+{{denergy}}</li>
-            <li class="resources">Galactic Currency:{{currency}}+{{dcurrency}}</li>
+            <li class="resources" id="{{ddarkMatter}}" >DarkMatter:{{darkMatter}}+{{ddarkMatter}}</li>
+            <li class="resources" id="{{dminerals}}" >Minerals:{{minerals}}+{{dminerals}}</li>
+            <li class="resources" id="{{dfood}}" >Food:{{food}}+{{dfood}}</li>
+            <li class="resources" id="{{dwater}}" > Water:{{water}}+{{dwater}}</li>
+            <li class="resources" id="{{doxygen}}" >Oxygen:{{oxygen}}+{{doxygen}}</li>
+            <li class="resources" id="{{denergy}}" >Energy:{{energy}}+{{denergy}}</li>
+            <li class="resources" id="{{dcurrency}}" >Galactic Currency:{{currency}}+{{dcurrency}}</li>
             <li class="resources">Station Levels:{{levels}}</li>
             <li class="resources">Location (x,y,z):{{X}},{{Y}},{{Z}}</li>
             <a href="/profile">
@@ -31,9 +31,20 @@
 
     <p id="sName">{{stationname}}</p>
     {{#installations}}
-    <h3>{{name}}</h3>
-    <h3>{{description}}</h3>
-    <img src="{{{graphic}}}">
+   
+    <form name="build" action="/install" method="post">
+        
+
+        <h3>{{name}}</h3>
+        <h3>{{description}}</h3>
+        <img src="{{{graphic}}}">
+        <h3>Level {{level}}</h3>
+
+        <input type="hidden" name="sid" id="sid" value={{view.sid}}>
+        <input type="hidden" name="_id" id="_id" value={{_id}}>
+
+        <button type="submit" class="btn btn-default">upgrade</button>
+    </form>
 
     {{/installations}}
     

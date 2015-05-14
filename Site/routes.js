@@ -71,6 +71,8 @@ module.exports = function (app, passport) {
             {
                 name: req.body.StationName,
                 race: req.body.race ,
+                population: 100,
+                engineers: 1,
                 location: { X: 1, Y: 1, Z: 1 } ,
                 resources: {
                     currency: 1000,
@@ -82,12 +84,12 @@ module.exports = function (app, passport) {
                     darkMatter: 20
                 }, 
                 delta: {
-                    currency: 0,
-                    energy: 0,
-                    oxygen: 0,
-                    water: 0,
-                    food: 0,
-                    minerals: 0,
+                    currency: 5,
+                    energy: 20,
+                    oxygen: 20,
+                    water: 20,
+                    food: 20,
+                    minerals: 20,
                     darkMatter: 0
                 },
                 ringWidth: 1,
@@ -185,6 +187,7 @@ module.exports = function (app, passport) {
                 bclass: station.race,
                 stationname: station.name, 
                 race: station.race,
+                level: station.level.one.level,
                 darkMatter: station.resources.darkMatter,
                 minerals: station.resources.minerals,
                 food: station.resources.food,
@@ -286,7 +289,7 @@ module.exports = function (app, passport) {
             
             Station.findById(req.body.sid, function (err, station) {
                 if (err) return handleError(err);
-                
+
                     if (station.resources.currency >= install.cost.currency && 
                     station.resources.energy >= install.cost.energy && 
                     station.resources.oxygen >= install.cost.oxygen &&
@@ -295,7 +298,9 @@ module.exports = function (app, passport) {
                     station.resources.minerals >= install.cost.minerals &&
                     station.resources.darkMatter >= install.cost.darkMatter &&
                     station.level.one.length < 8) {
-                        
+
+                        install.level = install.level + 1;
+
                         station.resources.currency = station.resources.currency - install.cost.currency;
                         station.resources.energy = station.resources.energy - install.cost.energy;
                         station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
@@ -311,6 +316,7 @@ module.exports = function (app, passport) {
                         station.delta.food = station.delta.food + install.delta.food;
                         station.delta.minerals = station.delta.minerals + install.delta.minerals;
                         station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
+                        
 
                     //installations take up space in the station
                     station.level.one.push(install);
@@ -330,6 +336,15 @@ module.exports = function (app, passport) {
             });
         });
     });
+
+    // =====================================
+    // map =================================
+    // =====================================
+    var map = require('./models/map.js');
+    
+
+    
+
     //custom 404 page
     app.use(function (req, res) {
         res.type('text/plain');

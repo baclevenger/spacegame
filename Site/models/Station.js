@@ -6,6 +6,8 @@ var stationSchema = mongoose.Schema({
     uID: mongoose.Schema.ObjectId,
     name: String,
     race: String,
+    population: Number,
+    engineers: Number, 
     location: {
         X: Number,
         Y: Number,
@@ -19,6 +21,7 @@ var stationSchema = mongoose.Schema({
                 name: String,
                 description: String,
                 graphic: String,
+                level: Number,
                 req: [{
                         type: Schema.Types.ObjectId,
                         ref: 'research'
