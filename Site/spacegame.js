@@ -42,10 +42,14 @@ var Agenda = require('Agenda');
  // set up our express application
  app.use(morgan('dev')); // log every request to the console
  app.use(cookieParser(credentials.cookieSecret)); // read cookies (needed for auth)
- app.use(bodyParser()); // get information from html forms
+ app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 
- // required for passport
- app.use(session(credentials.sessionSecret)); // session secret
+// required for passport
+ app.use(session({
+    secret: credentials.sessionSecret, 
+    saveUninitialized: true,
+    resave: true
+ })); // session secret
  app.use(passport.initialize());
  app.use(passport.session()); // persistent login sessions
  app.use(flash()); // use connect-flash for flash messages stored in session
