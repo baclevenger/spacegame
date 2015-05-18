@@ -336,6 +336,70 @@ module.exports = function (app, passport) {
             });
         });
     });
+    
+    // =====================================
+    // upgrade==============================
+    // =====================================
+    
+    //process the install page 
+    app.post('/update', isLoggedIn, function (req, res) {
+            
+            Station.findById(req.body.sid, function (err, station) {
+            if (err) return handleError(err);
+            
+            
+            //not working yet
+            Station.findOne({ level: { one: { _id: req.body._id } } }, function (err, install) {
+                if (err) return handleError(err);
+                
+                if (station.resources.currency >= install.cost.currency && 
+                    station.resources.energy >= install.cost.energy && 
+                    station.resources.oxygen >= install.cost.oxygen &&
+                    station.resources.water >= install.cost.water &&
+                    station.resources.food >= install.cost.food &&
+                    station.resources.minerals >= install.cost.minerals &&
+                    station.resources.darkMatter >= install.cost.darkMatter &&
+                    station.level.one.length < 8) {
+                    
+                    install.level = install.level + 1;
+                    
+                    station.resources.currency = station.resources.currency - install.cost.currency;
+                    station.resources.energy = station.resources.energy - install.cost.energy;
+                    station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
+                    station.resources.water = station.resources.water - install.cost.water;
+                    station.resources.food = station.resources.food - install.cost.food;
+                    station.resources.minerals = station.resources.minerals - install.cost.minerals;
+                    station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
+                    
+                    station.delta.currency = station.delta.currency + install.delta.currency;
+                    station.delta.energy = station.delta.energy + install.delta.energy;
+                    station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
+                    station.delta.water = station.delta.water + install.delta.water;
+                    station.delta.food = station.delta.food + install.delta.food;
+                    station.delta.minerals = station.delta.minerals + install.delta.minerals;
+                    station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
+                    
+                    
+                    //installations take up space in the station
+                    station.level.one.push(install);
+                    console.log(station.level.one[0]);
+                    
+                    station.markModified('array');
+                    station.save(function (err) {
+                        if (err) { console.error(err.stack); }
+                        res.redirect('/ingame');
+                    
+                    });
+                }
+
+                else {
+                    //cost message
+                    res.redirect('/ingame')
+                }
+            });
+          })
+    });
+    
 
     // =====================================
     // map =================================
