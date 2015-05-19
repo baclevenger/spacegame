@@ -349,7 +349,7 @@ module.exports = function (app, passport) {
             
             
             //not working yet
-            Station.findOne({ level: { one: { _id: req.body._id } } }, function (err, install) {
+            Station.findOne({ "level.one": { _id: req.body._id } }, function (err, install) {
                 if (err) return handleError(err);
                 
                 if (station.resources.currency >= install.cost.currency && 
