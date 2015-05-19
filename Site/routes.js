@@ -347,9 +347,9 @@ module.exports = function (app, passport) {
             Station.findById(req.body.sid, function (err, station) {
             if (err) return handleError(err);
             
+            var ObjectID = require('mongodb').ObjectID;
 
-
-            Station.findOne({ level: { one: { $elemMatch: { _id: req.body._id } } } }, function (err, install) {
+            Station.findOne({ "level.one": { $elemMatch: { _id: new ObjectID(req.body._id)} } }, function (err, install) {
                 if (err) return handleError(err);
                 
                 if (station.resources.currency >= install.cost.currency && 
