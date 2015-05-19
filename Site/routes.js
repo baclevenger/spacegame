@@ -348,8 +348,7 @@ module.exports = function (app, passport) {
             if (err) return handleError(err);
             
 
-
-            Station.findOne({ level: { one: { $elemMatch: { _id: req.body._id } } } }, function (err, install) {
+            Station.findOne({ 'station.level.one._id': id }, function (err, install) {
                 if (err) return handleError(err);
                 
                 if (station.resources.currency >= install.cost.currency && 
