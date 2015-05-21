@@ -347,65 +347,62 @@ module.exports = function (app, passport) {
             Station.findById(req.body.sid, function (err, station) {
             if (err) return handleError(err);
             
-            //while loop here
-            
-
-            
-            
-
-            var ObjectID = require('mongodb').ObjectID;
-
-            Station.findOne({ "level.one": { $elemMatch: { _id: new ObjectID(req.body._id)} } }, function (err, install) {
-                if (err) return handleError(err);
                 
-                if (station.resources.currency >= install.cost.currency && 
-                    station.resources.energy >= install.cost.energy && 
-                    station.resources.oxygen >= install.cost.oxygen &&
-                    station.resources.water >= install.cost.water &&
-                    station.resources.food >= install.cost.food &&
-                    station.resources.minerals >= install.cost.minerals &&
-                    station.resources.darkMatter >= install.cost.darkMatter &&
-                    station.level.one.length < 8) {
+                //while loop here
+                var install = station.level.one;
+                for (i = 0; i < install.length; i++) {
+                    install[i];
+                    if (install[i]._id == req.body._id) {
                     
-                    install.level = install.level + 1;
-                    
-                    station.resources.currency = station.resources.currency - install.cost.currency;
-                    station.resources.energy = station.resources.energy - install.cost.energy;
-                    station.resources.oxygen = station.resources.oxygen - install.cost.oxygen;
-                    station.resources.water = station.resources.water - install.cost.water;
-                    station.resources.food = station.resources.food - install.cost.food;
-                    station.resources.minerals = station.resources.minerals - install.cost.minerals;
-                    station.resources.darkMatter = station.resources.darkMatter - install.cost.darkMatter;
-                    
-                    station.delta.currency = station.delta.currency + install.delta.currency;
-                    station.delta.energy = station.delta.energy + install.delta.energy;
-                    station.delta.oxygen = station.delta.oxygen + install.delta.oxygen;
-                    station.delta.water = station.delta.water + install.delta.water;
-                    station.delta.food = station.delta.food + install.delta.food;
-                    station.delta.minerals = station.delta.minerals + install.delta.minerals;
-                    station.delta.darkMatter = station.delta.darkMatter + install.delta.darkMatter;
-                    
-                    
-                    //installations take up space in the station
-                    station.level.one.push(install);
-                    console.log(station.level.one[0]);
-                    
-                    station.markModified('array');
-                    station.save(function (err) {
-                        if (err) { console.error(err.stack); }
-                        res.redirect('/ingame');
-                    
-                    });
-                }
+                        
+                        if (station.resources.currency >= station.level.one[i].cost.currency && 
+                    station.resources.energy >= station.level.one[i].cost.energy && 
+                    station.resources.oxygen >= station.level.one[i].cost.oxygen &&
+                    station.resources.water >= station.level.one[i].cost.water &&
+                    station.resources.food >= station.level.one[i].cost.food &&
+                    station.resources.minerals >= station.level.one[i].cost.minerals &&
+                    station.resources.darkMatter >= station.level.one[i].cost.darkMatter) {
+                            
+                            station.level.one[i].level = station.level.one[i].level  + 1;
+                           
+                        station.resources.currency = station.resources.currency - station.level.one[i].cost.currency * station.level.one[i].level+1;
+                        station.resources.energy = station.resources.energy - station.level.one[i].cost.energy * station.level.one[i].level + 1;;
+                        station.resources.oxygen = station.resources.oxygen - station.level.one[i].cost.oxygen * station.level.one[i].level + 1;;
+                        station.resources.water = station.resources.water - station.level.one[i].cost.water * station.level.one[i].level + 1;;
+                        station.resources.food = station.resources.food - station.level.one[i].cost.food * station.level.one[i].level + 1;;
+                        station.resources.minerals = station.resources.minerals - station.level.one[i].cost.minerals * station.level.one[i].level + 1;;
+                        station.resources.darkMatter = station.resources.darkMatter - station.level.one[i].cost.darkMatter * station.level.one[i].level + 1;;
 
-                else {
-                    //cost message
-                    res.redirect('/ingame')
+                            
+                            station.delta.currency = station.delta.currency + station.level.one[i].delta.currency;
+                            station.delta.energy = station.delta.energy + station.level.one[i].delta.energy;
+                            station.delta.oxygen = station.delta.oxygen + station.level.one[i].delta.oxygen;
+                            station.delta.water = station.delta.water + station.level.one[i].delta.water;
+                            station.delta.food = station.delta.food + station.level.one[i].delta.food;
+                            station.delta.minerals = station.delta.minerals + station.level.one[i].delta.minerals;
+                            station.delta.darkMatter = station.delta.darkMatter + station.level.one[i].delta.darkMatter;
+                            
+                            
+                            //installations take up space in the station
+                            //station.level.one.push(install);
+                            console.log(station.level.one[i]);
+                            
+                            station.markModified('array');
+                            station.save(function (err) {
+                                if (err) { console.error(err.stack); }
+                                res.redirect('/ingame');
+                    
+                            });
+                        }
+                        else {
+                            //cost message
+                            res.redirect('/ingame')
+                        }
+                    }
                 }
-            });
-          })
-    });
-    
+                  
+                });
+            })
 
     // =====================================
     // map =================================
