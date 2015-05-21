@@ -1,4 +1,31 @@
+<script type="text/javascript" src="jq.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 
+{{#section 'head'}}
+<script src="handlebars.js" type="text/javascript"></script>
+
+<script id="installlationTemplate" type="text/x-handlebars-template">
+    <h1> Installations available</h1>
+    <p1>
+        \{{#each binstallations}}
+        <form name="build" action="/install1" method="post">
+            <input type="hidden" name="sid" id="sid" value=\{{sid}}>
+
+            <h3>\{{name}}</h3>
+            <h3>\{{description}}</h3>
+
+            <input type="hidden" name="_id" id="_id" value=\{{_id}}>
+
+            <button type="submit" class="btn btn-default">Build</button>
+        </form>
+        <img src="\{{{graphic}}}">
+        \{{/each}}
+
+    </p1>
+
+</script>
+
+{{/section}}
     <!--<div id="1" class="center"></div>-->
     <title>Infinite Space</title>
 
@@ -20,10 +47,10 @@
 
             <!-- Install button -->
 
-            <form name="install" action="/install" method="post">
-                <input type="hidden" name="sid" id="sid" value={{sid}}>
-                <button type="submit" class="btn btn-default">Build</button>
-            </form>
+        <form name="install" id="install" role="form" action="/install" method="post">
+            <input type="hidden" name="sid" id="sid" value={{sid}}>
+            <button id="btnBuildAjax" value="build" type="submit" class="btn btn-default">Build</button>
+        </form>
 
             <!-- Install button -->
         </ul>
@@ -50,7 +77,7 @@
     </form>
 
     {{/installations}}
-    
+
 </div>
 <!-- Left side menu -->
 
@@ -60,25 +87,61 @@
 
 </div>
 <!-- Right side menu -->
- 
 
 {{#if error}}
 <div class="center">{{error}}</div>
 {{/if}}
- 
 
-<br/>
+
+<br />
 
 <div id="1">
     <p2>
         <a href="/logout">
-            <button  type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
+            <button type="submit" id="logoutBtn" class="btn btn-default">Log Out</button>
         </a>
     </p2>
 
 </div>
-    
-         
+{{#section 'jquery'}}
+<script>
+    $(document).ready(function () {
+
+        var installlationTemplate = Handlebars.compile(
+            $('#installlationTemplate').html());
+
+        var $contextual = $('#contextual');
+
+        $('#install').on('submit', function (evt) {
+            evt.preventDefault();
+            var action = $(this).attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(data){
+                    if (data) {
+                        $contextual.html(installlationTemplate(data));
+                    } else {
+                        $contextual.html('There was a problem. inner');
+                    }
+                },
+                error: function () {
+                    $contextual.html('There was a problem. outer');
+                }
+            });
+        });
+
+    });
+</script>
+{{/section}}
 
 
-     
+
+
+
+
+
+
+
+

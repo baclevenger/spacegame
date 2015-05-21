@@ -3,12 +3,12 @@
 <head>
 	<title>Infinite Space</title>
     <link rel="stylesheet", href='/bootstrap/css/bootstrap.min.css'>
-    <link rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css'>
+    <link rel="stylesheet" , href='/bootstrap/css/bootstrap-theme.min.css'>
 	<link rel="stylesheet" type="text/css" href="SpaceGame.css"> 
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
-
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     <script src='/bootstrap/js/bootstrap.min.js'></script>
+    {{{_sections.head}}}
 </head>
 <body class="{{bclass}}">
     {{#if flash}}
@@ -19,6 +19,7 @@
     {{/if}}
 
 	{{{body}}}
+    {{{_sections.jquery}}}
 </body>
 
 

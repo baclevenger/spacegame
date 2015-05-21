@@ -240,18 +240,18 @@ module.exports = function (app, passport) {
             //only displays installations they can afford
             
             installation.find({
-               "cost.currency": { $lte: station.resources.currency},
-               "cost.energy": { $lte: station.resources.energy},
-               "cost.oxygen": { $lte: station.resources.oxygen},
-               "cost.water": { $lte: station.resources.water},
-               "cost.food": { $lte: station.resources.food },
-               "cost.minerals": { $lte: station.resources.minerals },
-               "cost.darkMatter": { $lte: station.resources.darkMatter }
+                "cost.currency": { $lte: station.resources.currency },
+                "cost.energy": { $lte: station.resources.energy },
+                "cost.oxygen": { $lte: station.resources.oxygen },
+                "cost.water": { $lte: station.resources.water },
+                "cost.food": { $lte: station.resources.food },
+                "cost.minerals": { $lte: station.resources.minerals },
+                "cost.darkMatter": { $lte: station.resources.darkMatter }
 
             }, function (err, installations) {
                 if (err) { console.error(err.stack); }
                 var context = {
-                    installations: installations.map(function (installation) {
+                    binstallations: installations.map(function (installation) {
                         return {
                             sid: req.body.sid,
                             _id: installation._id,
@@ -275,12 +275,12 @@ module.exports = function (app, passport) {
                         }
                     })
                 };
-                res.render('install', context);
+                res.json(context);
             });
         })
     
     });
-          
+        
     //process the install page 
     app.post('/install1', isLoggedIn, function (req, res) {
         
@@ -336,7 +336,6 @@ module.exports = function (app, passport) {
             });
         });
     });
-    
     // =====================================
     // upgrade==============================
     // =====================================
@@ -409,9 +408,6 @@ module.exports = function (app, passport) {
     // =====================================
     var map = require('./models/map.js');
     
-
-    
-
     //custom 404 page
     app.use(function (req, res) {
         res.type('text/plain');

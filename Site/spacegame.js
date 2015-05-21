@@ -5,7 +5,16 @@
 var express = require('express');
 var app = express();
 
-var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
+var handlebars = require('express3-handlebars').create({
+    defaultLayout: 'main',
+    helpers: {
+        section: function (name, options) {
+            if (!this._sections) this._sections = {};
+            this._sections[name] = options.fn(this);
+            return null;
+        }
+    }
+});
 	app.engine('handlebars', handlebars.engine);
 	app.set('view engine', 'handlebars');
  
@@ -20,7 +29,8 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  var morgan = require('morgan');
  var cookieParser = require('cookie-parser');
  var bodyParser = require('body-parser');
- var session = require('express-session');
+var session = require('express-session');
+var Agenda = require('Agenda');
 
 //configuration==============================================
  var credentials = require('./config/credentials.js');
@@ -32,10 +42,14 @@ var handlebars = require('express3-handlebars').create({defaultLayout:'main' });
  // set up our express application
  app.use(morgan('dev')); // log every request to the console
  app.use(cookieParser(credentials.cookieSecret)); // read cookies (needed for auth)
- app.use(bodyParser()); // get information from html forms
+ app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 
- // required for passport
- app.use(session(credentials.sessionSecret)); // session secret
+// required for passport
+ app.use(session({
+    secret: credentials.sessionSecret, 
+    saveUninitialized: true,
+    resave: true
+ })); // session secret
  app.use(passport.initialize());
  app.use(passport.session()); // persistent login sessions
  app.use(flash()); // use connect-flash for flash messages stored in session
@@ -49,10 +63,12 @@ var opts = {
      }
  };
  switch (app.get('env')) {
-     case 'development':
+    case 'development':
+        var agenda = new Agenda({ db: { address: credentials.mongo.development.connectionString } });
          mongoose.connect(credentials.mongo.development.connectionString, opts);
          break;
-     case 'production':
+    case 'production':
+        var agenda = new Agenda({ db: { address: credentials.mongo.production.connectionString } });
          mongoose.connect(credentials.mongo.production.connectionString, opts);
          break;
      default:
@@ -240,8 +256,10 @@ installation.find(function (err, installations) {
 require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
+
 //Launch app
 app.listen(app.get('port'), function(){
 	console.log( 'Express started on http://localhost:' + 
 		app.get('port') + '; press Crtl-C to terminate.');
 });
+
